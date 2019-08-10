@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="630213764346-ggdjtn692tlsa55g8fpt3vpcc5thf5fb.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/style.css" type="text/css">
+    <title>Fancy Todo</title>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <button onclick="signOut()">Sign Out</button>
+    </div>
+    <div id="first-pop-up">
+        <div id="left-form">
+            <form id="register" action="/" method="POST">
+                <label for="name">Full Name: </label><br>
+                <input type="text" name="full_name" autofocus required><br>
+                <label for="email">Email: </label><br>
+                <input type="text" name="email" autofocus required><br>
+                <label for="password">Password: </label><br>
+                <input type="text" name="password" autofocus required><br>
+                <input type="submit" value="Register"><br>
+            </form>
+        </div>
+        <div id="right-form">
+            <form id="login" action="/" method="POST">
+                <label for="email">Email: </label><br>
+                <input type="text" name="email" autofocus required><br>
+                <label for="password">Password: </label><br>
+                <input type="text" name="password" autofocus required><br>
+                <input type="submit" value="Sign In">
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->    
+    <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+	    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="./scripts/googleSignIn.js"></script>
+</body>
+</html>

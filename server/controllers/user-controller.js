@@ -1,11 +1,14 @@
-const axios = require('axios')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user-model')
 
-const {hashPass, compareHash} = require('../helpers/passHash')
+const {hashPass} = require('../helpers/passHash')
+
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 class UserController {
     static register(req, res, next) {
+        let registered = {}
         const newUserData = {
             full_name: req.body.full_name,
             email: req.body.email,
@@ -13,7 +16,13 @@ class UserController {
         }
         User.create(newUserData)
             .then(newUser => {
-                res.status(201).json(newUser)
+                registered._id = newUser._id
+                registered.full_name = newUser.full_name
+                registered.email = newUser.email
+                return jwt.sign(registered)
+            })
+            .then(token => {
+                res.json({full_name: registered.full_name, token})
             })
             .catch(next)
     }
@@ -37,13 +46,41 @@ class UserController {
                 }
             })
             .then(token => {
-                res.json({token})
+                res.json({full_name: loggedIn.full_name, token})
             })
             .catch(next)
     }
 
     static googleSignIn(req, res, next) {
-
+        let thisUser = {}
+        client.verifyIdToken({
+            idToken: req.body.id_token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        })
+            .then(ticket => {
+                
+                thisUser.full_name = ticket.getPayload().name
+                thisUser.email = ticket.getPayload().email
+                thisUser.password = hashPass(process.env.PASSWORD)
+                thisUser.loginType = 'google'
+                return User.findOne({
+                    email: ticket.getPayload().email
+                })
+            })
+            .then(user => {
+                if(user) {
+                    return user
+                } else {
+                    return User.create(thisUser)
+                }
+            })
+            .then( createdUser => {
+                return jwt.sign(thisUser, process.env.JWT_SECRET)
+            })
+            .then( token => {
+                res.json({full_name: thisUser.full_name, token})
+            })
+            .catch(next)
     }
 }
 
