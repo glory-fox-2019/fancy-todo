@@ -35,7 +35,7 @@ const todoSchema =  new Schema({
         ref: 'User'
     }
 }, {
-    versionKey = false
+    versionKey: false
 })
 
 const Todo = mongoose.model('Todo', todoSchema);
