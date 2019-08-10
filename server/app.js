@@ -1,11 +1,12 @@
 if(!process.env.NODE_ENV || process.env.NODE_ENV == 'development'){
+    console.log('development')
     require('dotenv').config()
 }
 const express = require('express')
 const cors = require('cors')
 const mongoose =require('mongoose')
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 const userRoute = require('./routes/user')
 const todoRoute = require('./routes/todo')
 
