@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user-model')
 
-const {hashPass} = require('../helpers/passHash')
+const {hashPass, compareHash} = require('../helpers/passHash')
 
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -19,7 +19,7 @@ class UserController {
                 registered._id = newUser._id
                 registered.full_name = newUser.full_name
                 registered.email = newUser.email
-                return jwt.sign(registered)
+                return jwt.sign(registered, process.env.JWT_SECRET)
             })
             .then(token => {
                 res.json({full_name: registered.full_name, token})

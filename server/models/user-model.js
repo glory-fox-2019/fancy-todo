@@ -38,7 +38,7 @@ User.schema.path('email').validate(function(value, next) {
                     resolve()
                 }
             })
-            .catch(err => {throw err})
+            .catch(next)
 
     })
 })

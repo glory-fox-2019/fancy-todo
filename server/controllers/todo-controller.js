@@ -6,7 +6,7 @@ class TodoController {
     static getAllTodo(req, res, next) {
         Todo.find({
             email: req.currentUser.email
-        })
+        }).populate('user_id', '_id full_name email')
             .then(todo => {
                 if(todo.length > 0) {
                     res.json(todo)
@@ -36,10 +36,11 @@ class TodoController {
         const {name} = req.params
         Todo.find({
             name: {
-                $regex: name
+                $regex: name,
+                $options: 'i'
             },
             user_id: req.currentUser._id
-        })
+        }).populate('user_id', '_id full_name email')
             .then(todos => {
                 res.json(todos)
             })
@@ -67,7 +68,7 @@ class TodoController {
         const {_id} = req.body
         Todo.deleteOne({_id})
             .then(() => {
-                res.status(204).json({message: "todo successfuly deleted"})
+                res.status(204).json({message: "Todo successfuly deleted"})
             })
             .catch(next)
     }

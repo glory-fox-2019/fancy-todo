@@ -23,6 +23,7 @@ const TodoSchema = new Schema({
         type: Date
     }
 }, {
+    timestamps: true,
     versionKey: false
 })
 

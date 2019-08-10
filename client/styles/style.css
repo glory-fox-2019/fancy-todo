@@ -1,11 +1,84 @@
-
-
-#first-pop-up {
-    width: 80%;
-    height: 200px;
-    display: block;
+body {
+    background-color: #eaf7ff;
+    letter-spacing: 1px;
 }
 
-#left-form {
-    float: left;
+#header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #75b1d7;
+    padding: 10px;
+}
+
+#app-name {
+    margin-left: 90px;
+}
+
+#sign-out {
+    margin-right: 90px;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #fab8cc;
+    color: #1c5c9c;
+    font-weight: bold;
+}
+
+#sign-out:hover {
+    background-color: #1c5c9c;
+    color: #fab8cc;
+}
+
+#first-pop-up {
+    position: absolute;
+    margin-left: 16%;
+    margin-top: 3%;
+    text-align: center;
+    background-color: #cfe9fc;
+    border: 5px solid #bad8eb;
+    border-radius: 25px;
+    z-index: 2;
+}
+
+#left-form{
+    border-right: 3px solid #bad8eb;
+}
+
+.col-sm-6 h2 {
+    padding-top: 20px;
+}
+
+.first-form {
+    padding: 50px;
+}
+
+.login-form {
+    padding-top: 30px;
+}
+
+#google-button {
+    position: absolute;
+    margin-top: 450px;
+    margin-left: 590px;
+    border-style: 'outset';
+    z-index: 5;
+}
+
+#sign-in-button {
+    margin-top: 26px;
+}
+
+#content {
+    display: block;
+    margin: 20px;
+    display: none;
+}
+
+#error-message {
+    text-align: center;
+    color: #f02864;
+    position: absolute;
+    margin-top: 115px;
+    visibility: hidden;
+    font-weight: bold;
+    width: 100%;
 }
