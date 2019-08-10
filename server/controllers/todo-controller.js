@@ -4,9 +4,11 @@ const Todo = require('../models/todo-model')
 class TodoController {
 
     static getAllTodo(req, res, next) {
-        Todo.find()
+        Todo.find({
+            email: req.currentUser.email
+        })
             .then(todo => {
-                if(todo) {
+                if(todo.length > 0) {
                     res.json(todo)
                 } else {
                     next({status: 404, message: "There are no todos yet"})
@@ -16,32 +18,49 @@ class TodoController {
     }
 
     static addTodo(req, res, next) {
-        const {name, description} = req.body
-        Todo.create({
-            name,
-            description
-        })
-            .then(() => {
-                res.status(201).json({name, description})
+        const newTodo = {
+            name: req.body.name,
+            description: req.body.description,
+            user_id: req.currentUser._id
+        }
+        req.body.due_date && (newTodo.due_date = new Date(req.body.due_date))
+
+        Todo.create(newTodo)
+            .then(created => {
+                res.status(201).json(created)
             })
             .catch(next)
     }
 
     static filterTodo(req, res, next) {
-        const {name} = req.body
+        const {name} = req.params
         Todo.find({
             name: {
                 $regex: name
-            }
+            },
+            user_id: req.currentUser._id
         })
             .then(todos => {
-                res,json(todos)
+                res.json(todos)
             })
             .catch(next)
     }
 
     static updateTodo(req, res, next) {
-        
+        const {_id} = req.body
+        const todoUpdate = {}
+        req.body.name && (todoUpdate.name = req.body.name)
+        req.body.description && (todoUpdate.description = req.body.description)
+        req.body.completed && (todoUpdate.completed = req.body.completed)
+        req.body.due_date && (todoUpdate.due_date = req.body.due_date)
+
+        Todo.updateOne(_id, {
+            $set: todoUpdate
+        })
+            .then(updated => {
+                res.json(updated)
+            })
+            .catch(next)
     }
 
     static removeTodo(req, res, next) {

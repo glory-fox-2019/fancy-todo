@@ -1,13 +1,30 @@
 const jwt = require('jsonwebtoken')
-const { userAuthentication, userAuthorization } = require('../middlewares/authUser')
+const Todo = require('../models/todo-model')
 
 function userAuthentication (req, res, next) {
-    const {token} = req.headers.token
-    const aaa = jwt.verify(token, process.env.JWT_SECRET)
+    const {token} = req.headers
+
+    const currentUser = jwt.verify(token, process.env.JWT_SECRET)
+    if(currentUser) {
+        req.currentUser = currentUser
+        next()
+    }
 }
 
 function userAuthorization (req, res, next) {
-
+    Todo.findById(req.params.id)
+        .then(todo => {
+            if(todo) {
+                if(todo.user_id === req.currentUser._id) {
+                    next()
+                } else {
+                    next({status: 401, message: "This todo is not yours"})
+                }
+            } else {
+                next({status: 404, message: "todo not found"})
+            }
+        })
+        .catch(next)
 }
 
 module.exports = {

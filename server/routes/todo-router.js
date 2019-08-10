@@ -1,12 +1,16 @@
 const router = require('express').Router()
+const TodoController = require('../controllers/todo-controller')
+const { userAuthentication, userAuthorization } = require('../middlewares/authUser')
 
-router.get('/:email') // get all todos based on email
-router.post('/:email') // make todo
+router.use(userAuthentication)
 
-router.get('/:email/:name') // filter todo by name
+router.get('/', TodoController.getAllTodo) // get all todos based on current user
+router.post('/', TodoController.addTodo) // make todo
 
-router.patch('/:email/:id') // update a todo
+router.get('/:name', TodoController.filterTodo) // filter todo by name
 
-router.delete('/:email/:id') // delete a todo
+router.patch('/:_id', TodoController.updateTodo) // update a todo
+
+router.delete('/:_id', userAuthorization, TodoController.removeTodo) // delete a todo
 
 module.exports = router

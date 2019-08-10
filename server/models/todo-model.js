@@ -23,10 +23,9 @@ const TodoSchema = new Schema({
         type: Date
     }
 }, {
-    timestamps: true,
     versionKey: false
 })
 
 const Todo = mongoose.model('Todo', TodoSchema)
 
-module.exports = mongoose.model(Todo)
+module.exports = Todo
