@@ -37,13 +37,13 @@ http://localhost:3000
 | GET | /projects/:projectId | {token: String} | none | Get one authenticated user project |[Get One Project](https://github.com/tyogautomo/fancy-todo-1#get-one-authenticated-user-project)|
 | POST | /projects | {token: String} | name: string<br>description: string<br> | Create project |[Create Project](https://github.com/tyogautomo/fancy-todo-1#create-project)|
 | PATCH | /projects/:projectId | {token: String} | name: string<br>description: string<br> | Edit authenticated user project |[Edit Project](https://github.com/tyogautomo/fancy-todo-1#update-an-authenticated-user-project)|
-| DELETE | /projects/:projectId | {token: String} | none | Delete authenticated user project |[Delete Project]()|
-| POST | /projects/invite | {token: String} | email: string | Invite member to an authenticated user Project |[Invite Member]()|
-| POST | /projects/remove-member | {token: String} | email: string | Remove member from an authenticated user Project |[Remove Member]()|
-| POST | /projects/todos/add | {token: String} | name: string<br>description: string<br>due_date: date | Create project todos |[Create Project's Todo]()|
-| PATCH | /projects/todos/:todoId/edit | {token: String} | name: string<br>description: string<br>due_date: date | Edit project todos |[Update Project's Todo]()|
-| GET | /projects/todos/:todoId | {token: String} | none | Get one project todo |[Get a Project's Todo]()|
-| DELETE | /projects/todos/:todoId/delete | {token: String} | none | Delete one project todo |[Delete Project's Todo]()|
+| DELETE | /projects/:projectId | {token: String} | none | Delete authenticated user project |[Delete Project](https://github.com/tyogautomo/fancy-todo-1#delete-an-authenticated-user-project)|
+| POST | /projects/invite | {token: String} | email: string | Invite member to an authenticated user Project |[Invite Member](https://github.com/tyogautomo/fancy-todo-1#invite-a-member-to-authenticated-user-projects)|
+| POST | /projects/remove-member | {token: String} | email: string | Remove member from an authenticated user Project |[Remove Member](https://github.com/tyogautomo/fancy-todo-1#remove-a-member-from-authenticated-user-projects)|
+| POST | /projects/todos/add | {token: String} | name: string<br>description: string<br>due_date: date | Create project todos |[Create Project's Todo](https://github.com/tyogautomo/fancy-todo-1#create-a-todo-in-authenticated-user-projects)|
+| PATCH | /projects/todos/:todoId/edit | {token: String} | name: string<br>description: string<br>due_date: date | Edit project todos |[Update Project's Todo](https://github.com/tyogautomo/fancy-todo-1#edit-a-project-todo-in-authenticated-user-projects)|
+| GET | /projects/todos/:todoId | {token: String} | none | Get one project todo |[Get a Project's Todo](https://github.com/tyogautomo/fancy-todo-1#create-a-todo-in-authenticated-user-projects)|
+| DELETE | /projects/todos/:todoId/delete | {token: String} | none | Delete one project todo |[Delete Project's Todo](https://github.com/tyogautomo/fancy-todo-1#delete-a-project-todo-in-authenticated-user-projects)|
 
 # Request & Response Details
 
