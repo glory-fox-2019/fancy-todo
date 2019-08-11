@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id"
+        content="766289673486-gie88b4rldfst5g6jshn07s8i5n5ueka.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/stye.css">
+    <title>My List</title>
+</head>
+
+<body>
+    <h1 class="logoName d-flex justify-content-center mt-5">~ My List ~</h1>
+    <p class="logoQuote d-flex justify-content-center mt-5">- what's next ? -</p>
+
+
+    <div id="beforeLogin">
+        <div id="loginForm" class="d-flex justify-content-center mt-5">
+            <form id="sign-in" method="post">
+                <h4 class="labelName d-flex justify-content-center mt-2">Sign In</h4>
+                <hr class="sign-in-hr">
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName">Email</h6>
+                    </label>
+                    <input id="email" name="email" class="form-control" autocomplete="off" type="text">
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Password</h6>
+                    </label>
+                    <input id="password" name="password" class="form-control" autocomplete="off" type="password">
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn labelName pb-0">
+                        <h5>Sign In</h5>
+                    </button>
+                </div>
+                <hr class="sign-in-hr">
+                <h5 class="sign-in-separator d-flex justify-content-center mt-3">- Or -</h5>
+                <center>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </center>
+                <hr class="sign-in-hr">
+                <div class="col-sm-12 text-center">
+                </div>
+            </form>
+        </div>
+        <center>
+            <button onclick="registerOn()" class="btn labelName text-center mb-1">
+                <h5>Register New User</h5>
+            </button>
+        </center>
+    </div>
+
+    <div id="registerForm">
+        <div class="d-flex justify-content-center mt-5">
+            <form id="sign-up" method="post">
+                <h4 class="labelName d-flex justify-content-center mt-2">Register New Account</h4>
+                <hr class="sign-in-hr">
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName">Name</h6>
+                    </label>
+                    <input id="userName" name="name" class="form-control" autocomplete="off" type="text">
+                </div>
+                <div class="col-sm-12 mt-2">
+                    <label>
+                        <h6 class="labelName">Email</h6>
+                    </label>
+                    <input id="userEmail" name="email" class="form-control" autocomplete="off" type="text">
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Password</h6>
+                    </label>
+                    <input id="userPassword" name="password" class="form-control" autocomplete="off" type="password">
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn labelName mb-0 mt-1">
+                        <h5>Register</h5>
+                    </button>
+                </div>
+                <hr class="sign-in-hr mb-3 mt-1">
+            </form>
+        </div>
+        <center>
+            <button id="backFromNewTask" class="btn labelName" onclick="backToTaskList()">
+                <h5>Back</h5>
+            </button>
+        </center>
+    </div>
+
+    <div id="afterLogin">
+        <div id="listCRUD" class="d-flex justify-content-center mt-5">
+            <div class="tableBox mb-3">
+                <h4 class="labelName d-flex justify-content-center mt-2">What To Do</h4>
+                <center>
+                    <button id="new-task" class="btn labelName d-flex justify-content-center mt-1 mb-0"
+                        onclick="addNewTask()">New Task</button>
+                    <button class="btn labelName" id="sign-out" onclick="signOut()">Sign Out</button>
+                </center>
+                <hr class="sign-in-hr mt-1">
+                <table class="listTable">
+                    <thead>
+                        <tr>
+                            <th class="labelName text-center"></th>
+                            <th class="labelName text-center">No.</th>
+                            <th class="labelName text-center">Task</th>
+                            <th class="labelName text-center">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskListBody">
+                    </tbody>
+                </table>
+                <hr class="sign-in-hr mt-1 mb-3">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="addNewTaskForm">
+        <div id="addTaskForm" class="d-flex justify-content-center mt-0">
+            <form id="add-task" action="" method="POST">
+                <h4 class="labelName d-flex justify-content-center mt-2">Add New Task</h4>
+                <hr class="sign-in-hr">
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName">Task Name</h6>
+                    </label>
+                    <input id="name" name="name" class="form-control" autocomplete="off" type="text"
+                        placeholder="Input task name">
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Description</h6>
+                    </label>
+                    <textarea id="description" class="form-control" rows="5" cols="25"
+                        placeholder="Input task description"></textarea>
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Due Date</h6>
+                    </label>
+                    <input id="dueDate" name="dueDate" class="form-control" autocomplete="off" type="date">
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button class="btn labelName mb-0 mt-2">
+                        <h5>Save Task</h5>
+                    </button>
+                </div>
+                <hr class="sign-in-hr mt-0 mb-0">
+            </form>
+        </div>
+        <center>
+            <button id="backFromNewTask" class="btn labelName" onclick="backToTaskList()">
+                <h5>Back</h5>
+            </button>
+        </center>
+    </div>
+
+    <div id="editTaskForm">
+        <div id="EditTaskForm" class="d-flex justify-content-center mt-0">
+            <form id="edit-task" action="" method="POST">
+                <h4 class="labelName d-flex justify-content-center mt-2">Edit Task</h4>
+                <hr class="sign-in-hr">
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName">Task Name</h6>
+                    </label>
+                    <input id="taskName" name="name" class="form-control" autocomplete="off" type="text" value="">
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Description</h6>
+                    </label>
+                    <textarea id="taskDescription" class="form-control" rows="5" cols="25" value=""></textarea>
+                </div>
+                <div class="col-sm-12">
+                    <label>
+                        <h6 class="labelName mt-2">Due Date</h6>
+                    </label>
+                    <input id="taskDueDate" name="dueDate" class="form-control" autocomplete="off" type="date">
+                </div>
+                <div id="editButton" class="col-sm-12 text-center">
+                    <button class="btn labelName pb-0 mt-2">
+                        <h5>Save Update</h5>
+                    </button>
+                </div>
+                <hr class="sign-in-hr mb-1">
+            </form>
+        </div>
+        <center>
+            <button id="backFromNewTask" class="btn labelName" onclick="backToTaskList()">
+                <h5>Back</h5>
+            </button>
+        </center>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

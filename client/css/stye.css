@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+title{
+    color: #421f00;
+    font-family: 'Pacifico', cursive;
+}
+
+body{
+    background-color: whitesmoke;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* #loginForm{
+    margin: auto;
+    margin-top: 0 !important;
+    padding: auto;
+    width: 400px;
+    border: 3px solid #421f00;
+    border-radius: 20%;
+}
+
+#listCRUD{
+    margin: auto;
+    margin-top: 0 !important;
+    padding: auto;
+    width: 500px;
+    border: 3px solid #421f00;
+    border-radius: 20%;
+} */
+
+/* #addTaskForm{
+    margin: auto;
+    margin-top: 0 !important;
+    padding: auto;
+    width: 400px;
+    border: 3px solid #421f00;
+    border-radius: 20%;
+} */
+
+.logoName{
+    margin-top: 2rem !important;
+    font-size: 50px;
+    color: #421f00;
+    font-family: 'Pacifico', cursive;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.logoQuote{
+    margin-top: 1rem !important;
+    margin-bottom: 1rem!important;
+    font-size: 20px;
+    color: grey;
+    font-family: 'Pacifico', cursive;
+}
+
+.labelName{
+    color: #421f00;
+    font-family: 'Pacifico', cursive;
+}
+
+.sign-in-hr{
+    border: 0.5px solid #421f00;
+}
+
+.sign-in-separator{
+    color: #421f00;
+    font-family: 'Pacifico', cursive;
+}
+
+#email, #password, #name{
+    background-color:rgba(0, 0, 0, 0);
+    color: #421f00;
+    border: 2px solid #421f00;
+    outline:none;
+    height:30px;
+    transition:height 0.5s;
+    -webkit-transition:height 0.5s;
+}
+
+#description{
+    background-color:rgba(0, 0, 0, 0);
+    color: #421f00;
+    border: 2px solid #421f00;
+    outline:none;
+    transition:height 0.5s;
+    -webkit-transition:height 0.5s;
+}
+
+
+#email:focus, #password:focus, #name:focus{
+    height:50px;
+    font-size:16px;
+}
+
+.iconImage{
+    height: 30px;
+    width: 30px;
+}
+
+.listTable{
+    padding: auto;
+    margin: auto;
+}
+.task-hr{
+    border: 0.5px solid #421f00
+}
+
+.checkbox{
+    border: none;
+    background: url('./logo/checked.png');
+}
