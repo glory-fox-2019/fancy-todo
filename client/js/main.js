@@ -30,6 +30,9 @@ $(document).ready(function () {
     openEditProjectTodo()
     editProjectTodo()
     deleteProjectTodo()
+
+    doneProjectTodo()
+    undoneProjectTodo()
     // ================ 3rd party API
     yesOrNo()
 })
@@ -1124,6 +1127,66 @@ function deleteProjectTodo() {
     })
 }
 
+function doneProjectTodo() {
+    $(document).on('click', '.finish-todo-project', function (event) {
+        event.preventDefault()
+        let todoId = $(this).attr('class').split(' ')[1]
+        let projectId = $('.project-page-title').attr('class').split(' ')[1]
+
+        $.ajax({
+                method: 'PATCH',
+                url: `${baseURL}/projects/todos/${todoId}/status`,
+                headers: {
+                    token: localStorage.getItem('token')
+                },
+                data: {
+                    projectId
+                }
+            })
+            .done(response => {
+                $('.todos-list').empty()
+
+                // get project todos
+                if ($('.project-page-title').attr('class').split(' ')[1]) {
+                    getProjectTodos($('.project-page-title').attr('class').split(' ')[1])
+                }
+            })
+            .fail(err => {
+                console.log(err)
+            })
+    })
+}
+
+function undoneProjectTodo() {
+    $(document).on('click', '.unfinish-todo-project', function (event) {
+        event.preventDefault()
+        let todoId = $(this).attr('class').split(' ')[1]
+        let projectId = $('.project-page-title').attr('class').split(' ')[1]
+
+        $.ajax({
+                method: 'PATCH',
+                url: `${baseURL}/projects/todos/${todoId}/status`,
+                headers: {
+                    token: localStorage.getItem('token')
+                },
+                data: {
+                    projectId
+                }
+            })
+            .done(response => {
+                $('.todos-list').empty()
+                getMyTodo()
+
+                if ($('.project-page-title').attr('class').split(' ')[1]) {
+                    getProjectTodos($('.project-page-title').attr('class').split(' ')[1])
+                }
+            })
+            .fail(err => {
+                console.log(err)
+            })
+    })
+}
+
 // ===================================================== THIRD PARTY API
 
 function yesOrNo() {
@@ -1222,7 +1285,7 @@ function getProjectTodos(projectId) {
             $('.project-todos-list').empty()
             for (let i = 0; i < todos.length; i++) {
                 let status = todos[i].status == 'undone' ? 'Done' : 'Undone'
-                let classStat = todos[i].status == 'undone' ? 'finish' : 'unfinish'
+                let classStat = todos[i].status == 'undone' ? 'finish-todo-project' : 'unfinish-todo-project'
 
                 $('.project-todos-list').append(
                     `
@@ -1313,4 +1376,3 @@ function getMyTodo() {
             console.log(err)
         })
 }
-

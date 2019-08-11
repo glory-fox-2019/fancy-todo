@@ -22,4 +22,6 @@ router.patch('/todos/:todoId/edit', auth.authProjectMember, ProjectController.up
 router.get('/todos/:todoId', auth.authProjectMember, TodoController.getOne)
 router.delete('/todos/:todoId/delete', auth.authProjectMember, TodoController.delete)
 
+router.patch('/todos/:todoId/status', auth.authProjectMember, TodoController.status)
+
 module.exports = router
