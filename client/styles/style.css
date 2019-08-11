@@ -1,0 +1,108 @@
+body {
+    background-color: #cccccc;
+    letter-spacing: 1px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #aaaaaa;
+    padding: 10px;
+}
+
+#app-name {
+    margin-left: 90px;
+}
+
+#sign-out {
+    border: 3px solid #404347;
+    margin-right: 90px;
+    border-radius: 8px;
+    padding: 5px;
+    background-color:#666666;
+    color: #bbbbbb;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+#sign-out:hover {
+    background-color: #bbbbbb;
+    color: #666666;
+}
+
+#first-pop-up {
+    position: absolute;
+    visibility: hidden;
+    margin-left: 16%;
+    margin-top: 3%;
+    text-align: center;
+    background-color: #9ba8ae;
+    border: 5px solid #495054;
+    border-radius: 25px;
+    z-index: 2;
+}
+
+.col-sm-6 h2 {
+    padding-top: 20px;
+}
+
+.first-form {
+    padding: 50px;
+}
+
+.login-form {
+    padding-top: 30px;
+}
+
+#google-button {
+    position: absolute;
+    margin-top: 450px;
+    margin-left: 590px;
+    border-style: 'outset';
+    z-index: 5;
+}
+
+#sign-in-button {
+    margin-top: 26px;
+}
+
+#content {
+    display: block;
+    margin: 20px;
+    display: none;
+}
+
+.todo-updel-buttons {
+    padding-left: 300px;
+}
+
+#welcome {
+    font-size: 23px;
+    padding: 10px;
+}
+
+#filter-todo {
+    text-align: right;
+    width: 300px;
+}
+
+.accordion {
+    margin-top: 20px;
+}
+
+.todo-title button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #495054;
+}
+
+#error-message {
+    text-align: center;
+    color: #f02864;
+    position: absolute;
+    margin-top: 115px;
+    visibility: hidden;
+    font-weight: bold;
+    width: 100%;
+    z-index: 6;
+}

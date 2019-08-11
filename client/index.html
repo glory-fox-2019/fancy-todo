@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="630213764346-ggdjtn692tlsa55g8fpt3vpcc5thf5fb.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/style.css" type="text/css">
+    <title>Fancy Todo</title>
+</head>
+<body>
+    <header id="header">
+        <h1 id="app-name">Todo App</h1>
+        <button id="sign-out" class="btn-danger btn" onclick="signOut();">Sign Out</button>
+    </header>        
+    <div class="container">        
+        <div id="content" class="row">
+            <h3 id="welcome"></h3>
+            <div class="col row m-2">
+                    <button id="todo-maker" class="btn btn-primary col-md-2" type="button" data-toggle="collapse" data-target="#create-todo" aria-expanded="false" aria-controls="create-todo">Make a Todo</button>
+                    <form id="filter-todo" class="col" method="POST">
+                        <input type="text" name="name" size="40" placeholder="Filter Todo Name">
+                    </form>
+            </div>
+            <div class="collapse multi-collapse" id="create-todo">
+                <div class="card card-body">
+                    <form id="make-todo" action="POST">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input name="name" type="text" class="form-control" id="create-todo-name" aria-describedby="emailHelp" placeholder="Enter Todo Name" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea name="description" class="form-control rounded-0" id="create-todo-desc" autofocus required></textarea>                        
+                        </div>
+                        <div class="form-group">
+                            <label for="due_date">Due date</label>
+                            <input name="due_date" type="date" class="form-control" id="create-todo-due" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="accordion" id="todo-lists">
+                
+            </div>
+        </div>
+        <div id="first-pop-up" class="row">
+            <div id="left-form" class="col-sm-6">
+                <h2>Register</h2>
+                <form id="register" class="first-form" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name </label><br>
+                        <input type="text" name="full_name" placeholder="Name" autofocus required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email </label><br>
+                        <input type="text" name="email" placeholder="Email" autofocus required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password </label><br>
+                        <input type="password" name="password" placeholder="Password" autofocus required><br>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Register"><br>
+                </form>
+            </div>
+                <div id="right-form" class="col-sm-6">
+                    <h2>Sign In</h2>
+                    <form id="login" class="first-form" method="POST">
+                        <div class="form-group login-form">
+                            <label for="email">Email </label><br>
+                            <input type="text" name="email" placeholder="Email" autofocus required>
+                        </div>
+                        <div class="form-group login-form">
+                            <label for="password">Password </label><br>
+                            <input type="password" name="password" placeholder="Password" autofocus required><br>
+                        </div>
+                        <input id="sign-in-button" class="btn btn-primary" type="submit" value="Sign In">
+                    </form>
+                </div>
+            </div>
+    </div>
+    <div id="error-message">
+        <p id="err">abc</p>
+    </div>
+    <div id="google-button" class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
+    <!-- Scripts -->    
+    <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+	    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./scripts/scripts.js"></script>
+</body>
+</html>
