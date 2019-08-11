@@ -1,20 +1,20 @@
 # fancy-todo
 
 ## Table of Contents  
-[Getting Started](#getting%20started)  
-[RESTful API](#restful%20api)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Todo Route API](#todo%20route%20api)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!](#notes!)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo](#get%20/todo)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo/:name](#get%20/todo/:name)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /todo](#post%20/todo)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!!](#notes!!)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete /todo/:_id](#delete%20/todo/:_id)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Patch /todo/:_id](#patch%20/todo/:_id)  
-&nbsp;&nbsp;&nbsp;&nbsp;[User Route API](#user%20route%20api)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/register](#post%20/user/register)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/signin](#post%20/user/signin)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/googlesignin](#post%20/user/googlesignin)  
+[Getting Started](#user-content-getting-started)  
+[RESTful API](#user-content-restful-api)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Todo Route API](#user-content-todo-route-api)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!](#user-content-notes)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo](#user-content-get-todo)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo/:name](#user-content-get-todo-name)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /todo](#user-content-post-todo)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!!](#user-content-notes-1)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete /todo/:_id](#user-content-delete-todo)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Patch /todo/:_id](#user-content-patch-todo)  
+&nbsp;&nbsp;&nbsp;&nbsp;[User Route API](#user-content-todo-user-api)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/register](#user-content-post-userregister)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/signin](#user-content-post-usersignin)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/googlesignin](#user-content-post-usergooglesignin)  
 
 ## Getting Started  
 Open env template, fill in the environment variables, and save it as .env  
