@@ -68,13 +68,14 @@ class UserController {
                         }
                     })
                     .then(data => {
+                        console.log('Berhasil Login')
                         let token = createToken(data)
                         const { firstname, id } = data
                         res.status(200).json({ token, firstname, id })
                     })
             })
             .catch(err => {
-                res.send(err)
+                res.status(500)({ message: 'Internal Server Error' })
             })
     }
 

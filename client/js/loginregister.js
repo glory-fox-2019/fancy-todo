@@ -65,7 +65,10 @@ function loginContent() {
                 mainContent()
             })
             .fail(err => {
-                console.log(err)
+                Swal.fire({
+                    type: 'error',
+                    text: 'Something error',
+                })
             })
     })
 
@@ -96,27 +99,27 @@ function loginContent() {
             })
     })
 
-    $('body').on('click', '.g-signin2n', function onSignIn(googleUser) {
-        console.log('aaa')
-        event.preventDefault()
-        var id_token = googleUser.getAuthResponse().id_token
-        $.ajax({
-                url: `http://localhost:3000/user/loginOauth`,
-                method: `POST`,
-                data: {
-                    token: id_token
-                }
-            })
-            .then(data => {
-                console.log('berhasil')
-                localStorage.setItem('token', data.token)
-                localStorage.setItem('firstname', data.firstname)
-                mainContent()
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    })
+    // $('body').on('click', '.g-signin2n', function onSignIn(googleUser) {
+    //     console.log('aaa')
+    //     event.preventDefault()
+    //     var id_token = googleUser.getAuthResponse().id_token
+    //     $.ajax({
+    //             url: `http://localhost:3000/user/loginOauth`,
+    //             method: `POST`,
+    //             data: {
+    //                 token: id_token
+    //             }
+    //         })
+    //         .then(data => {
+    //             console.log('berhasil')
+    //             localStorage.setItem('token', data.token)
+    //             localStorage.setItem('firstname', data.firstname)
+    //             mainContent()
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // })
 
 
 
