@@ -6,17 +6,17 @@ http://localhost:3000
 ```
 
 ## Index of Reference:
-* [Users]()
-* [Todos]()
-* [Projects]()
+* [Users](https://github.com/tyogautomo/fancy-todo-1#users)
+* [Todos](https://github.com/tyogautomo/fancy-todo-1#todos)
+* [Projects](https://github.com/tyogautomo/fancy-todo-1#projects)
 
 
 ## Users API
 |  HTTP  | Endpoint | Headers | Body | Description | Reference |
 |---|---|---|:-:|---|---|
-| POST | /users/register | none | name: string<br>email: string<br>password: string | Register new user |[Register]()|
-| POST | /users/login | none | email: string<br>password: string | Login user |[Login]()|
-| GET | /users/todos | {token: String} | none | Get authenticated user todos |[Get User Todos]()|
+| POST | /users/register | none | name: string<br>email: string<br>password: string | Register new user |[Register](https://github.com/tyogautomo/fancy-todo-1#register)|
+| POST | /users/login | none | email: string<br>password: string | Login user |[Login](https://github.com/tyogautomo/fancy-todo-1#login)|
+| GET | /users/todos | {token: String} | none | Get authenticated user todos |[Get User Todos](https://github.com/tyogautomo/fancy-todo-1#get-user-todos)|
 
 ## Todos API
 ### All the Todos APIs below referenced to the authenticated User's "Todos"
