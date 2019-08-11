@@ -4,15 +4,14 @@ const Schema = mongoose.Schema
 const TodoSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: [true, "Please enter todo name"]
     },
     description: {
         type: String,
-        required: true
+        required: [true, "Please enter description"]
     },
     completed: {
         type: Boolean,
-        required: true,
         default: false
     },
     user_id: {

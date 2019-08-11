@@ -16,47 +16,105 @@
     </header>        
     <div class="container">        
         <div id="content" class="row">
-            <h1></h1>
+            <h3 id="welcome"></h3>
+            <div class="col row m-2">
+                    <button class="btn btn-primary col-md-2" type="button" data-toggle="collapse" data-target="#create-todo" aria-expanded="false" aria-controls="create-todo">Make a Todo</button>
+                    <form id="filter-todo" class="col" method="POST">
+                        <input type="text" name="name" placeholder="Filter Todo">
+                    </form>
+            </div>
+            <div class="collapse multi-collapse" id="create-todo">
+                <div class="card card-body">
+                    <form id="make-todo" action="POST">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input name="name" type="text" class="form-control" id="create-todo-name" aria-describedby="emailHelp" placeholder="Enter Todo Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea name="description" class="form-control rounded-0" id="create-todo-desc"></textarea>                        
+                        </div>
+                        <div class="form-group">
+                            <label for="due_date">Due date</label>
+                            <input name="due_date" type="date" class="form-control" id="create-todo-due">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="accordion" id="todo-lists">
+                
+            </div>
         </div>
         <div id="first-pop-up" class="row">
-                <div id="left-form" class="col-sm-6">
-                        <h2>Register</h2>
-                        <form id="register" class="first-form" method="POST">
-                            <div class="form-group">
-                                <label for="name">Full Name </label><br>
-                                <input type="text" name="full_name" placeholder="Name" autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email </label><br>
-                                <input type="text" name="email" placeholder="Email" autofocus required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password </label><br>
-                                <input type="password" name="password" placeholder="Password" autofocus required><br>
-                            </div>
-                            <input class="btn btn-primary" type="submit" value="Register"><br>
-                        </form>
-                </div>
+            <div id="left-form" class="col-sm-6">
+                <h2>Register</h2>
+                <form id="register" class="first-form" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name </label><br>
+                        <input type="text" name="full_name" placeholder="Name" autofocus required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email </label><br>
+                        <input type="text" name="email" placeholder="Email" autofocus required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password </label><br>
+                        <input type="password" name="password" placeholder="Password" autofocus required><br>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Register"><br>
+                </form>
+            </div>
                 <div id="right-form" class="col-sm-6">
-                        <h2>Sign In</h2>
-                        <form id="login" class="first-form" method="POST">
-                            <div class="form-group login-form">
-                                <label for="email">Email </label><br>
-                                <input type="text" name="email" placeholder="Email" autofocus required>
-                            </div>
-                            <div class="form-group login-form">
-                                <label for="password">Password </label><br>
-                                <input type="password" name="password" placeholder="Password" autofocus required><br>
-                            </div>
-                            <input id="sign-in-button" class="btn btn-primary" type="submit" value="Sign In">
-                        </form>
+                    <h2>Sign In</h2>
+                    <form id="login" class="first-form" method="POST">
+                        <div class="form-group login-form">
+                            <label for="email">Email </label><br>
+                            <input type="text" name="email" placeholder="Email" autofocus required>
+                        </div>
+                        <div class="form-group login-form">
+                            <label for="password">Password </label><br>
+                            <input type="password" name="password" placeholder="Password" autofocus required><br>
+                        </div>
+                        <input id="sign-in-button" class="btn btn-primary" type="submit" value="Sign In">
+                    </form>
                 </div>
-              </div>
+            </div>
     </div>
     <div id="error-message">
         <p id="err">abc</p>
     </div>
     <div id="google-button" class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Scripts -->    
     <script
@@ -66,7 +124,8 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="./scripts/googleSignIn.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <script src="./scripts/googleSignIn.js"></script> -->
     <script src="./scripts/scripts.js"></script>
 </body>
 </html>

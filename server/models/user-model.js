@@ -19,10 +19,6 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: [true, "Please enter your password"]
-    },
-    loginType: {
-        type: String,
-        default: 'normal' // check if via google or normal login
     }
 })
 

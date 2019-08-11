@@ -62,7 +62,6 @@ class UserController {
                 thisUser.full_name = ticket.getPayload().name
                 thisUser.email = ticket.getPayload().email
                 thisUser.password = hashPass(process.env.PASSWORD)
-                thisUser.loginType = 'google'
                 return User.findOne({
                     email: ticket.getPayload().email
                 })
@@ -75,7 +74,8 @@ class UserController {
                 }
             })
             .then( createdUser => {
-                return jwt.sign(thisUser, process.env.JWT_SECRET)
+                const {_id, full_name, email} = createdUser
+                return jwt.sign({_id, full_name, email}, process.env.JWT_SECRET)
             })
             .then( token => {
                 res.json({full_name: thisUser.full_name, token})

@@ -4,12 +4,13 @@ const Todo = require('../models/todo-model')
 class TodoController {
 
     static getAllTodo(req, res, next) {
+        console.log(req.currentUser, "dalam getall")
         Todo.find({
-            email: req.currentUser.email
+            user_id: req.currentUser._id
         }).populate('user_id', '_id full_name email')
             .then(todo => {
                 if(todo.length > 0) {
-                    res.json(todo)
+                    res.json(todo.sort((a, b) => b.createdAt - a.createdAt))
                 } else {
                     next({status: 404, message: "There are no todos yet"})
                 }
@@ -42,7 +43,10 @@ class TodoController {
             user_id: req.currentUser._id
         }).populate('user_id', '_id full_name email')
             .then(todos => {
-                res.json(todos)
+                if(todos.due_date) {
+                    todos.due_date = todos.due_date.toISOString().slice(0, 11)
+                }
+                res.json(todos.sort((a, b) => b.createdAt - a.createdAt))
             })
             .catch(next)
     }
@@ -65,7 +69,7 @@ class TodoController {
     }
 
     static removeTodo(req, res, next) {
-        const {_id} = req.body
+        const {_id} = req.params
         Todo.deleteOne({_id})
             .then(() => {
                 res.status(204).json({message: "Todo successfuly deleted"})

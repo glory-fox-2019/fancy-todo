@@ -1,12 +1,12 @@
 body {
-    background-color: #eaf7ff;
+    background-color: #cccccc;
     letter-spacing: 1px;
 }
 
 #header {
     display: flex;
     justify-content: space-between;
-    background-color: #75b1d7;
+    background-color: #aaaaaa;
     padding: 10px;
 }
 
@@ -18,14 +18,15 @@ body {
     margin-right: 90px;
     border-radius: 8px;
     padding: 5px;
-    background-color: #fab8cc;
-    color: #1c5c9c;
+    background-color:#666666;
+    color: #bbbbbb;
     font-weight: bold;
+    visibility: hidden;
 }
 
 #sign-out:hover {
-    background-color: #1c5c9c;
-    color: #fab8cc;
+    background-color: #bbbbbb;
+    color: #666666;
 }
 
 #first-pop-up {
@@ -37,10 +38,6 @@ body {
     border: 5px solid #bad8eb;
     border-radius: 25px;
     z-index: 2;
-}
-
-#left-form{
-    border-right: 3px solid #bad8eb;
 }
 
 .col-sm-6 h2 {
@@ -73,6 +70,10 @@ body {
     display: none;
 }
 
+.todo-updel-buttons {
+    padding-left: 300px;
+}
+
 #error-message {
     text-align: center;
     color: #f02864;
@@ -81,4 +82,5 @@ body {
     visibility: hidden;
     font-weight: bold;
     width: 100%;
+    z-index: 6;
 }

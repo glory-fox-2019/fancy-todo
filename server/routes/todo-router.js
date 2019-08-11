@@ -9,7 +9,7 @@ router.post('/', TodoController.addTodo) // make todo
 
 router.get('/:name', TodoController.filterTodo) // filter todo by name
 
-router.patch('/:_id', TodoController.updateTodo) // update a todo
+router.patch('/:_id', userAuthorization, TodoController.updateTodo) // update a todo
 
 router.delete('/:_id', userAuthorization, TodoController.removeTodo) // delete a todo
 
