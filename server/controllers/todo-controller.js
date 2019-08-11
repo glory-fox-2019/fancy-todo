@@ -35,9 +35,9 @@ class TodoController {
         const newTodo = {
             name: req.body.name,
             description: req.body.description,
-            user_id: req.currentUser._id
+            due_date: req.body.due_date,
+            user_id: req.currentUser._id,
         }
-        req.body.due_date && (newTodo.due_date = new Date(req.body.due_date))
 
         Todo.create(newTodo)
             .then(({created}) => {
