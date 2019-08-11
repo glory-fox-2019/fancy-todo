@@ -1,0 +1,113 @@
+#header{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 40px;
+    border-radius: 0 0 0 40px;
+    justify-content: space-around;
+    box-shadow: 0px 10px 10px rgba(0,0,0,.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100%;
+  }
+
+  #user-signin{
+    display: flex;
+    align-items: center;
+  }
+  #user-signin img{
+    width: 35px;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+
+  #user-signin p{
+    margin-right: 20px;
+  }
+  #user-signin a{
+    border-radius: 7px;
+    padding: 5px 20px;
+    box-shadow: 0px 0px 4px #0077ff;
+  }
+  #user-signin a:hover{
+    box-shadow: 0px 0px 7px #0077ff;
+  }
+  #content-container{
+    margin-top: 150px;
+    margin-left: 500px;
+  }
+
+  #form-container{
+    margin-top: 150px;
+    margin-left: 500px;
+  }
+
+  body{
+    font-family: 'Noto Sans KR', sans-serif;
+    background: url("background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+  }
+  a{
+    text-decoration: none;
+  }
+
+  #nav-bar{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 100px;
+    left: 50px;
+  }
+
+  #home{
+      border-style: groove;
+      border-width: 3px;
+      border-radius: 5px;
+      font-size: 20px
+  }
+
+  #finished{
+    border-style: groove;
+    border-width: 3px;
+    border-radius: 5px;
+    font-size: 20px
+  }
+
+  #home:hover{
+      background-color: green
+  }
+
+  #finished:hover{
+      background-color: green
+  }
+
+  #todo-list{
+      border-style: solid;
+  }
+
+
+
+  h1:hover{
+      background-color: gray;
+      width: 30px
+  }
+
+  #logo{
+    display: flex;
+    align-items: center;
+  }
+  #logo img{
+    height: 60px;
+    margin-right: 20px;
+  }
+  #logo h1{
+    font-size: 18pt;
+    color: #0077ff;
+  }
+
+
+  
