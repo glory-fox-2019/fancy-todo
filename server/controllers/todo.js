@@ -107,6 +107,39 @@ class TodoController {
       res.status(404).json(err);
     })
   }
+
+  static updateTodo(req, res, next) {
+    const {todoEdit, descEdit, dateEdit} = req.body;
+    const payload = jwtVerify(req.params.token);
+    User.findOne({ username: payload.username })
+    .then(user => {
+      return Promise.all([user, Todo.findOne({ _id: req.params.todo_id })])
+    })
+    .then(result => {
+      let user = String(result[0]._id);
+      let todo = String(result[1].user_id);
+      if (user === todo) {
+        return Todo.updateOne({ _id: result[1]._id }, { 
+          todo: todoEdit, 
+          desc: descEdit, 
+          due_date: Date(dateEdit) 
+        })
+      } else {
+        return false;
+      }
+    })
+    .then(data => {
+      if (data) {
+        console.log('oke');
+        res.status(200).json({message: 'updated'});
+      } else {
+        res.status(403);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 }
 
 module.exports = TodoController;

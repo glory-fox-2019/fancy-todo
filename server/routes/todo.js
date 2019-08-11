@@ -11,5 +11,7 @@ router.post('/', TodoController.createTodo);
 
 router.get('/done/:todo_id/:token' , TodoController.doneTodo);
 
+router.post('/update/:todo_id/:token' , TodoController.updateTodo);
+
 
 module.exports = router;
