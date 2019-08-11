@@ -1,10 +1,12 @@
-require('dotenv').config()
+if (process.env.NODE_ENV == 'development') {
+    require('dotenv').config()
+}
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes')
 const errHandler = require('./middlewares/errhandler')
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express()
 
 mongoose.connect('mongodb://localhost:27017/fancy-todo', {useNewUrlParser: true}, function (err) {

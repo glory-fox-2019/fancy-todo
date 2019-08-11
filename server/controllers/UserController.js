@@ -9,7 +9,7 @@ class UserController {
             email: req.body.email
         })
         .then(created => {
-            res.status(200).json(created)
+            res.status(200).json("Sucessfully Register !")
         })
         .catch(next)
     }

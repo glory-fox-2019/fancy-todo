@@ -1,5 +1,5 @@
 const Todo = require('../models/Todo')
-
+const moment = require("moment")
 class TodoController {
     static create(req, res, next) {
         const { name, description, due_date } = req.body
@@ -11,7 +11,7 @@ class TodoController {
             owner
         })
         .then(created => {
-            res.status(201).json(created)
+            res.status(201).json("Successfully create Activity :)")
         })
         .catch(next)
     }
@@ -21,7 +21,25 @@ class TodoController {
             owner: req.decode._id
         }).populate('owner', 'username')
         .then(list => {
-            res.status(200).json(list)
+            let arrayOfList = []
+            let status;
+            for(let i = 0; i < list.length; i++){
+                if (list[i].status == false) {
+                    status = "Pending"
+                }
+                else {
+                    status = "Done"
+                }
+                let obj = {
+                    name: list[i].name,
+                    description: list[i].description,
+                    _id: list[i]._id,
+                    due_date: moment(list[i].due_date).format("YYYY-MM-DD"),
+                    status
+                }
+                arrayOfList.push(obj)
+            }
+            res.status(200).json(arrayOfList)
         })
         .catch(next)
     }
