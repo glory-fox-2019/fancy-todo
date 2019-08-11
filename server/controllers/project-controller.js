@@ -98,8 +98,6 @@ class ProjectController {
 
     static inviteMember(req, res, next) {
 
-        // console.log(req.query)
-
         // check if the member exist?
         User.findOne({
                 email: req.query.memberEmail
@@ -122,7 +120,6 @@ class ProjectController {
                 // check if the member already on this project?
                 let check = project.members.find(member => member.email == req.query.memberEmail)
                 if (check) {
-                    console.log(check)
                     next({
                         code: 400,
                         message: 'User already a member of this project.'

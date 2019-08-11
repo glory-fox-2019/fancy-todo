@@ -203,6 +203,7 @@ function loginPost() {
                 data: result
             })
             .done(response => {
+                // console.log(response)
                 localStorage.setItem('token', response.token)
                 localStorage.setItem('name', response.username)
 
@@ -619,6 +620,11 @@ function addProject() {
             })
             .catch(err => {
                 console.log(err)
+                Swal.fire({
+                    type: 'error',
+                    title: 'Something wrong..',
+                    text: 'Please input all fields!'
+                })
             })
     })
 }
@@ -1262,7 +1268,7 @@ function getMyTodo() {
             }
         })
         .done(response => {
-            let todos = response.todos
+            let todos = response
             for (let i = 0; i < todos.length; i++) {
                 if (todos[i].ProjectId == undefined || null) {
                     let status = todos[i].status == 'undone' ? 'Done' : 'Undone'
@@ -1307,3 +1313,4 @@ function getMyTodo() {
             console.log(err)
         })
 }
+

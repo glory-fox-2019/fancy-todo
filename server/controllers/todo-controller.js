@@ -24,6 +24,7 @@ class TodoController {
                 })])
             })
             .then(([todo]) => {
+                console.log(todo)
                 res.status(200).json(todo)
             })
             .catch(next)
@@ -61,7 +62,7 @@ class TodoController {
             })
             .then(updated => {
                 // console.log(updated)
-                res.status(200).json('Successfuly updated a Todo.')
+                res.status(200).json('Successfuly change a Todo status.')
             })
             .catch(next)
     }

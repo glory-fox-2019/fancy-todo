@@ -94,8 +94,9 @@ class UserController {
         User.findById(req.headers.decode.id)
             .populate('todos')
             .then(user => {
+                console.log(user.todos)
                 // console.log(user, 'user <<<<<<<<<<<<<<<<<')
-                res.status(200).json(user)
+                res.status(200).json(user.todos)
             })
             .catch(next)
     }
