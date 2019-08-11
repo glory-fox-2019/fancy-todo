@@ -7,7 +7,7 @@ $(document).ready(function() {
     showDashboardPage(token);
   } else {
     showLoginPage();
-}
+  }
 
   $('#btn-login-to-register').on('click', function() {
     $('#login-right').hide();
@@ -42,6 +42,7 @@ $(document).ready(function() {
       if (status === 'error') {
         console.log(req, status, err);
       }
+      failAlert('Wrong username / password!')
     })
   })
 
@@ -146,6 +147,45 @@ $(document).ready(function() {
     .fail(function(err) {
       $('#loading-page').hide();
       console.log(err, '<<<<<<<<<<<<<<<<< error');
+    })
+  })
+
+  $('#box-edit-icon').on('click', function() {
+    let todo = $('#title-todo').text();
+    let desc = $('#description-detail').text();
+    let due_date = $('#date-detail').text();
+    let year = new Date(due_date).getFullYear();
+    let month = new Date(due_date).getMonth();
+    let date = new Date(due_date).getDate();
+    // console.log(year, month, date);
+    let dateStr = `${year}-${date}-${month}`;
+    // console.log(dateStr);
+    $('#edit-todo').val(todo);
+    $('#edit-desc').val(desc);
+    $('#edit-date').val(dateStr);
+    $('#edit-date').attr('value', dateStr);
+    $('#edit').attr('todo-id', $(this).attr('todo-id'));
+  })
+  
+  $('#edit').on('click', function() {
+    let todoEdit = $('#edit-todo').val();
+    let descEdit = $('#edit-desc').val();
+    let dateEdit = $('#edit-date').val();
+    let todo_id = $(this).attr('todo-id');
+    console.log(todoEdit, descEdit, dateEdit);
+
+    $.ajax({
+      method: "post",
+      url: `${baseUrl}/todo/update/${todo_id}/${localStorage.getItem('token')}`,
+      data: { todoEdit, descEdit, dateEdit }
+    })
+    .done(function(data) {
+      $(`.card[obj-id=${todo_id}] .title-task`).text(todoEdit);
+      $(`.card[obj-id=${todo_id}] .date-task`).text(Date(dateEdit));
+      successAlert('Updated!');
+    })
+    .fail(function(err) {
+      console.log(err);
     })
   })
 })

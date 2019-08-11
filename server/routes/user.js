@@ -19,10 +19,10 @@ const storage = cloudinaryStorage({
 
 const parser = multer({ storage });
 
-router.post('/image/:token', parser.single("image"), userController.uploadImage);
-router.get('/image/:token', userController.getProfile);
+router.post('/register', userController.register);
 router.post('/', userController.signIn);
 router.post('/google', userController.googleSignIn);
-router.post('/register', userController.register);
+router.post('/image/:token', parser.single("image"), userController.uploadImage);
+router.get('/:token', userController.getProfile);
 
 module.exports = router;

@@ -21,7 +21,7 @@ function onSignIn(googleUser) {
     .done(function(res) {
       $('#loading-page').hide();
       localStorage.setItem('token', res.token);
-      // showDashboardPage(token);
+      showDashboardPage(token);
     })
     .fail(function(err) {
       $('#loading-page').hide();
@@ -40,9 +40,9 @@ function showLoginPage() {
 function prependCard(data) {
   let icon = '';
   if (data.status === true) {
-    icon = 'fas fa-check-circle'
+    icon = 'fas fa-check-circle';
   } else {
-    icon = 'far fa-times-circle'
+    icon = 'far fa-times-circle';
   }
   const html = `
   <div class="card blue-bg" obj-id="${data._id}">
@@ -50,7 +50,7 @@ function prependCard(data) {
       <i class="${icon} fa-2x"></i>
       <div class="title-desc-task">
         <div class="title-task">${data.todo}</div>
-        <div class="date-task">${data.due_date}</div>
+        <div class="date-task">${Date(data.due_date)}</div>
       </div>
     </div>
   </div>`
@@ -61,7 +61,7 @@ function getProfile(token) {
   $('#loading-page').show();
   $.ajax({
     method: "GET",
-    url: `${baseUrl}/user/image/${token}`
+    url: `${baseUrl}/user/${token}`
   })
   .done(function(res) {
     // console.log(res);
@@ -69,6 +69,7 @@ function getProfile(token) {
     $('#profile-img-box img').attr('src', res.profile_pic);
     $('#box-img-option-task img').attr('src', res.profile_pic);
     $('#name h4').text(res.full_name);
+    console.log($('#profile-option-task #box-img-option-task h5').text());
     $('#box-img-option-task h5').text(res.full_name);
     $('#email p').text(res.email);
   })
@@ -81,7 +82,6 @@ function getProfile(token) {
 function showDashboardPage(token) {
   $('#login-register').hide();
   $('#dashboard').show();
-
   getProfile(token);
 
   $('#body-detail').hide();
@@ -91,20 +91,37 @@ function showDashboardPage(token) {
 
   $('#add-task').on('click', function() {
     addTodo();
+    let uncomplete = $('#todo-task h2').text();
+    let all = $('#all-todo-task h2').text();
+    $('#todo-task h2').text(+uncomplete + 1);
+    $('#all-todo-task h2').text(+all + 1);
   })
 
   $('#loading-page').show();
+
   $.ajax({
     method: "GET",
     url: `${baseUrl}/todo/${token}`
   })
   .done(function(data) {
     $('#loading-page').hide();
+    let completed = 0;
+    let uncomplete = 0;
+    // console.log(data);
     for (let i = 0; i < data.length; i++) {
-      // prependCard(data[i]);
-      // console.log(data);
+      prependCard(data[i]);
+      if (data[i].status === true) {
+        completed += 1;
+      } else {
+        uncomplete += 1;
+      }
     }
+    $('#completed-task h2').text(completed);
+    $('#todo-task h2').text(uncomplete);
+    $('#all-todo-task h2').text(completed + uncomplete);
+    console.log(completed, uncomplete);
     cardClick();
+    
     $('#box-delete-icon').on('click', function() {
       const todo_id = $('#box-delete-icon').attr('todo-id');
       deleteTodo(todo_id, localStorage.getItem('token'));

@@ -23,7 +23,7 @@
           <header>
             <h1 id="login-header">Sign In</h1>
           </header>
-          <input class="form-control" type="text" name="loginEmail" placeholder="username">
+          <input class="form-control" type="text" name="loginEmail" placeholder="email">
           <input class="form-control" type="password" name="loginPassword" placeholder="password">
           <div class="box-btn">
             <button class="btn btn-lg" id="btn-login">Login</button>
@@ -43,9 +43,6 @@
           <input class="form-control" type="password" name="registerPassword" placeholder="password">
           <div class="box-btn">
             <button class="btn btn-lg" id="btn-register">Register</button>
-          </div>
-          <div class="third-party">
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
           </div>
         </div>
       </div>
@@ -83,25 +80,25 @@
           <img src="" alt="profile_pic">
         </div>
         <div id="name">
-          <h4>Hafidz Mahrus</h4>
+          <h4></h4>
         </div>
         <div id="email">
-          <p>imhavus@gmail.com</p>
+          <p></p>
         </div>
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change-profile-modal">Change Profile Pic</button>
         <div id="todo-info">
           <div id="completed-task">
-            <h2>10</h2>
+            <h2></h2>
             <p class="bold-info-todo">Completed</p>
             <p class="thin-info-todo">Task today</p>
           </div>
           <div id="todo-task">
-            <h2>20</h2>
+            <h2></h2>
             <p class="bold-info-todo">To-do</p>
             <p class="thin-info-todo">Task today</p>
           </div>
           <div id="all-todo-task">
-            <h2>90</h2>
+            <h2></h2>
             <p class="bold-info-todo">All</p>
             <p class="thin-info-todo">Completed</p>
           </div>
@@ -146,10 +143,10 @@
           <div id="box-img-option-task">
             <img src="" alt="">
           </div>
-          <h5>Hafidz Mahrus</h5>
+          <h5></h5>
         </div>
         <div id="box-edit-icon">
-          <i class="far fa-edit fa-lg"></i>
+          <i class="far fa-edit fa-lg" data-toggle="modal" data-target="#edit-modal"></i>
         </div>
         <div id="box-delete-icon">
           <i class="fas fa-trash fa-lg"></i>
@@ -237,6 +234,46 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" data-dismiss="modal" class="btn btn-primary" id="change-img-profile">Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">To do</span>
+            </div>
+            <input type="text" class="form-control" id="edit-todo">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Desc</span>
+            </div>
+            <input type="text" class="form-control" id="edit-desc">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Due_date</span>
+            </div>
+            <input name="edit-date" class="form-control" type="date" id="edit-date" required>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary" id="edit">Edit</button>
         </div>
       </div>
     </div>
