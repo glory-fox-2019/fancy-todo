@@ -13,7 +13,7 @@ function mainContent(firstname) {
                 <!-- Daily Task -->
                 <div class="col-sm-6 card task-content pos-relative">
                         
-                    <p class="username bg-primary text-white title raleway-font"> Daily Task </p>
+                    <p class="username bg-primary text-white title raleway-font point-cursor"> Daily Task </p>
                     <div id="task">
                         <div class="task-list" data="">
                         <p class="title-date raleway-font"> Date </p>
@@ -59,8 +59,8 @@ function mainContent(firstname) {
         <p class="col-sm-8"> Hello, ${localStorage.getItem('firstname')} </p> 
         </div>
             <p class="menu raleway-font"> Your Dashboard </p>
-            <ul class="submenu nunito-font">
-                <li> Daily Task </li>
+            <ul class="submenu nunito-font point-cursor">
+                <li id='daily-task'> Daily Task </li>
             </ul>
             <p class="menu raleway-font"> Projects </p>
             <ul class="submenu nunito-font point-cursor">
@@ -114,6 +114,10 @@ function mainContent(firstname) {
 
         getTodo()
 
+        $('body').on('click', '.daily-task', function() {
+            getTodo()
+        })
+
         $('body').on('click', '.delete-task', function() {
             let id = $(this).val()
             deleteTask(id)
@@ -164,7 +168,6 @@ function mainContent(firstname) {
         })
 
         $('#add-task-btn').on('click', function() {
-            console.log('Form add')
             const title = $('#task-title').val()
             const description = $('#task-description').val()
             const date = $('#task-date').val()
