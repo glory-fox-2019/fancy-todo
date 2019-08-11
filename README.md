@@ -42,7 +42,7 @@ __BASE URL__ http:localhost/8080
 ### Create <br>
  <b> POST </b> http:localhost/8080/todo/create <br>
 
-<b> Header <b>
+<b> Header <b> <br>
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -59,7 +59,7 @@ __BASE URL__ http:localhost/8080
 ### Get All Todo <br>
  <b> GET </b> http:localhost/8080/todo/gettodo <br>
 
-<b> Header <b>
+<b> Header <b> <br>
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -68,7 +68,7 @@ __BASE URL__ http:localhost/8080
 ### Get By Id <br>
  <b> GET </b> http:localhost/8080/todo/getbyid/:id <br>
 
-<b> Header <b>
+<b> Header <b> <br>
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -82,7 +82,7 @@ __BASE URL__ http:localhost/8080
 ### Update Todo <br>
  <b> PATCH </b> http:localhost/8080/todo/updatetodo/:id <br>
 
-<b> Header <b>
+<b> Header <b> <br>
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -99,7 +99,7 @@ __BASE URL__ http:localhost/8080
 ### Delete <br>
  <b> DELETE </b> http:localhost/8080/todo/delete/:id <br>
 
-<b> Header <b>
+<b> Header <b> <br>
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
