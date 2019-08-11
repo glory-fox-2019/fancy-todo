@@ -19,7 +19,8 @@ const TodoSchema = new Schema({
         ref: 'User'
     },
     due_date: {
-        type: Date
+        type: Date,
+        required: [true, "Please enter deadline"]
     }
 }, {
     timestamps: true,

@@ -22,7 +22,7 @@ class UserController {
                 return jwt.sign(registered, process.env.JWT_SECRET)
             })
             .then(token => {
-                res.json({full_name: registered.full_name, token})
+                res.status(201).json({full_name: registered.full_name, token})
             })
             .catch(next)
     }

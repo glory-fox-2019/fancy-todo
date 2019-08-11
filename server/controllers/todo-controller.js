@@ -1,16 +1,29 @@
-const axios = require('axios')
+const colorPicker = require('../helpers/getQRcolor')
 const Todo = require('../models/todo-model')
 
 class TodoController {
 
     static getAllTodo(req, res, next) {
-        console.log(req.currentUser, "dalam getall")
+
         Todo.find({
             user_id: req.currentUser._id
         }).populate('user_id', '_id full_name email')
             .then(todo => {
                 if(todo.length > 0) {
-                    res.json(todo.sort((a, b) => a.createdAt - b.createdAt))
+                    let output = []
+                    todo.forEach(el => {
+                        let colorCode = colorPicker(el.due_date)
+                        output.push({
+                            _id: el._id,
+                            name: el.name,
+                            description: el.description,
+                            completed: el.completed,
+                            due_date: el.due_date.toISOString().slice(0, 10) || "none",
+                            qr_link: `http://api.qrserver.com/v1/create-qr-code/?data=Todo: ${el.name} Description: ${el.description} Due: ${el.due_date.toISOString().slice(0, 10)}&size=100x100&bgcolor=${colorCode}`
+                        })
+                    })
+
+                    res.json(output.sort((a, b) => a.createdAt - b.createdAt))
                 } else {
                     next({status: 404, message: "There are no todos yet"})
                 }
@@ -27,8 +40,9 @@ class TodoController {
         req.body.due_date && (newTodo.due_date = new Date(req.body.due_date))
 
         Todo.create(newTodo)
-            .then(created => {
-                res.status(201).json(created)
+            .then(({created}) => {
+                let colorCode = colorPicker(created.due_date)
+                res.status(201).json({created, qr_link: colorCode})
             })
             .catch(next)
     }
@@ -43,24 +57,30 @@ class TodoController {
             user_id: req.currentUser._id
         }).populate('user_id', '_id full_name email')
             .then(todos => {
-                if(todos.due_date) {
-                    todos.due_date = todos.due_date.toISOString().slice(0, 11)
-                }
-                res.json(todos.sort((a, b) => a.createdAt - b.createdAt))
+                let output = []
+                todos.forEach(el => {
+                    let colorCode = colorPicker(el.due_date)
+                    output.push({
+                        _id: el._id,
+                        name: el.name,
+                        description: el.description,
+                        completed: el.completed,
+                        due_date: el.due_date.toISOString().slice(0, 10),
+                        qr_link: `http://api.qrserver.com/v1/create-qr-code/?data=Todo: ${el.name} Description: ${el.description} Due: ${el.due_date.toISOString().slice(0, 10)}&size=100x100&bgcolor=${colorCode}`
+                    })
+                })
+                res.json(output.sort((a, b) => a.createdAt - b.createdAt))
             })
             .catch(next)
     }
 
     static updateTodo(req, res, next) {
-        const {_id} = req.body
-        const todoUpdate = {}
-        req.body.name && (todoUpdate.name = req.body.name)
-        req.body.description && (todoUpdate.description = req.body.description)
-        req.body.completed && (todoUpdate.completed = req.body.completed)
-        req.body.due_date && (todoUpdate.due_date = req.body.due_date)
+        const {_id} = req.params
 
-        Todo.updateOne(_id, {
-            $set: todoUpdate
+        Todo.updateOne({_id}, {
+            $set: {
+                completed: true
+            }
         })
             .then(updated => {
                 res.json(updated)

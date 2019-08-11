@@ -1,12 +1,18 @@
 const serverUrl = "http://localhost:3000"
 $(document).ready(function(){
 
+    //set page if user log in or not
+
     if(localStorage.getItem("token")) {
         addTokenAfterSigned({
             full_name: localStorage.getItem("loggedIn"),
             token: localStorage.getItem("token")
         } )
+    } else {
+        $('#first-pop-up').css('visibility', 'visible')
     }
+
+    //register the user
 
     $('#register').submit(function() {
         event.preventDefault()
@@ -22,7 +28,7 @@ $(document).ready(function(){
             data: sendData
         })
             .done(function(data) {
-                console.log(data)
+
                 addTokenAfterSigned(data)
 
             })
@@ -30,6 +36,8 @@ $(document).ready(function(){
                 showError(err.responseJSON.message)
             })
     })
+
+    //user login
 
     $('#login').submit(function() {
         event.preventDefault()
@@ -52,26 +60,52 @@ $(document).ready(function(){
             })
         })
 
-        $(document).on('click', '.update-todo', function(){ 
-            console.log($(this).val(), "update this")
-       });
+    //add click event on dynamically added complete button
 
-       $(document).on('click', '.delete-todo', function(){ 
-
-        $.ajax({
-            url: `${serverUrl}/todo/${$(this).val()}`,
-            type: 'DELETE',
-            headers: {
-                'token': localStorage.getItem('token')
-            }
-        })
+    $(document).on('click', '.update-todo', function(){ 
+       
+        if(confirm("Have you finished this task?")) {
+            $.ajax({
+                url: `${serverUrl}/todo/${$(this).val()}`,
+                type: 'PATCH',
+                headers: {
+                    'token': localStorage.getItem('token')
+                }
+            })
             .done(function() {
-                console.log("Todo successfully deleted")
+                location.reload()
+                console.log('You have completed this todo')
             })
             .fail(function(err) {
                 console.log(err)
             })
+        }   
+    });
+
+    //add click event on dynamically added complete button
+
+    $(document).on('click', '.delete-todo', function(){ 
+        if(confirm('Are you sure you want to delete this todo?') ) {
+
+            $(this).closest("div.card").remove();
+            $.ajax({
+                url: `${serverUrl}/todo/${$(this).val()}`,
+                type: 'DELETE',
+                headers: {
+                    'token': localStorage.getItem('token')
+                }
+            })
+                .done(function() {
+                    console.log("Todo successfully deleted")
+                })
+                .fail(function(err) {
+                    console.log(err)
+                })
+        }
+
    });
+
+   //filter todo list based on input
 
    $('#filter-todo').submit(function() {
        event.preventDefault()
@@ -84,11 +118,16 @@ $(document).ready(function(){
             }
        })
         .done(function(todos) {
-            console.log(todos)
+
             $('#todo-lists').empty()
             populateTodos(todos)
         })
+        .fail(function(err) {
+            console.log(err)
+        })
    })
+
+   //create a todo listcrea
 
    $('#make-todo').submit(function() {
        event.preventDefault()
@@ -105,16 +144,19 @@ $(document).ready(function(){
                'token': localStorage.getItem('token')
            }
        })
-            .done( function(newTodo) {
-                
+            .done( function(newTodo) {                
                 populateTodos([newTodo])
-                console.log(newTodo)
+            })
+            .fail(function(err) {
+                showError(err.responseJSON.message)
             })
    })
+
+  
 })
 //  End Document Ready
 
-
+//sign in with google
 function onSignIn(googleUser) {
 
     const {id_token} = googleUser.getAuthResponse()
@@ -130,7 +172,7 @@ function onSignIn(googleUser) {
         })
   }
     
-      function signOut() {
+    function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             localStorage.removeItem("loggedIn")
@@ -142,19 +184,21 @@ function onSignIn(googleUser) {
             $('#content').css('display', 'none')
             console.log('User signed out.');
         });
-
-      }
+    }
 
 function showError(message) {
     $('#error-message').text(message)
     $('#error-message').css('visibility', 'visible')
 }
 
+// hide and show things after log in or register
+
 function addTokenAfterSigned(data) {
+    $('#first-pop-up').css('visibility', 'hidden')
+
     localStorage.setItem("token", data.token)
     localStorage.setItem("loggedIn", data.full_name)
-    console.log(localStorage)
-    $('#first-pop-up').css('visibility', 'hidden')
+
     $('#google-button').css('visibility', 'hidden')
     $('#error-message').css('visibility', 'hidden')
     $('#sign-out').css('visibility', 'visible')
@@ -166,9 +210,9 @@ function addTokenAfterSigned(data) {
     loadTodoList()
 }
 
-
+//get user's todo list after log in
 function loadTodoList() {
-    console.log(localStorage.getItem('token'), "masuk function load")
+
     $.ajax({
         url: `${serverUrl}/todo`,
         method: 'GET',
@@ -177,40 +221,54 @@ function loadTodoList() {
         }
     })
         .done(function(todos){
-            console.log(todos)
+
             $('#todo-lists').empty()
             populateTodos(todos)
         })
 }
 
+// load the todo list on page after login
 function populateTodos(list) {
     
             list.forEach(function(td, idx) {
                 $('#todo-lists').prepend(`
                 <div class="card">
                     <div class="card-header" id="heading${idx}">
-                    <h2 class="mb-0">
-                        <div class="todo-data row">
-                            <div class="todo-title col-6">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${idx}" aria-expanded="true" aria-controls="collapse${idx}">
-                                Title: ${td.name}
-                                </button>
+                        <h2 class="mb-0">
+                            <div class="todo-data row">
+                                <div class="todo-title col-6">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${idx}" aria-expanded="true" aria-controls="collapse${idx}">
+                                    Todo: ${td.name}
+                                    </button>
+                                </div>
+                                <div class="todo-updel-buttons col-6">
+                                    <button id=""complete-todo-button class="btn btn-info update-todo" value="${td._id}" dataTarget="#updateModal" data-id="${td._id}" >Complete</button>
+                                    <button class="btn btn-danger delete-todo" value="${td._id}">Delete</button>
+                                </div>
                             </div>
-                            <div class="todo-updel-buttons col-6">
-                                <button class="btn btn-info update-todo" value="${td._id}" dataTarget="#updateModal" data-id="${td._id}" >Update</button>
-                                <button class="btn btn-danger delete-todo" onclick="return confirm('Are you sure you want to delete this?');" value="${td._id}">Delete</button>
-                            </div>
-                        </div>
-                    </h2>
+                        </h2>
                     </div>
 
                     <div id="collapse${idx}" class="collapse show" aria-labelledby="heading${idx}" data-parent="#todo-lists">
-                        <div class="card-body">
-                            Description: ${td.description}
-                            <p class="due_date">Due: ${td.due_date || "none"}<p>
+                        <div class="card-body row">
+                            <div class="col-4">
+                                <p class=""desc>Description: ${td.description}</p>
+                                <p class="due_date">Due: ${td.due_date.toString().slice(0, 10)}</p>
+                                <p class="completed-todo">Completed: ${td.completed}</p>
+                            </div>
+                            <div class="col-5">
+                                <img src="${td.qr_link}">
+                            </div>
                         </div>
                     </div>
                 </div>
                 `)
             })
 }
+
+// function checkCompleted() {
+//     $('.card').each(function() {
+//         console.log($(this))
+//         console.log($(this).find('.completed-todo'))
+//     })
+// }

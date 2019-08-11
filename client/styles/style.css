@@ -31,11 +31,12 @@ body {
 
 #first-pop-up {
     position: absolute;
+    visibility: hidden;
     margin-left: 16%;
     margin-top: 3%;
     text-align: center;
-    background-color: #cfe9fc;
-    border: 5px solid #bad8eb;
+    background-color: #9ba8ae;
+    border: 5px solid #495054;
     border-radius: 25px;
     z-index: 2;
 }
@@ -72,6 +73,10 @@ body {
 
 .todo-updel-buttons {
     padding-left: 300px;
+}
+
+.accordion {
+    margin-top: 20px;
 }
 
 #error-message {
