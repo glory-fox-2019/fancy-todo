@@ -1,10 +1,12 @@
 const baseUrl = "http://localhost:3000";
-$('#login-register').hide();
 
 $(document).ready(function() {
-  // $('#dashboard').hide();
-  // $('#register-right').hide();
-  // $('#register-left').hide();
+
+  showLoginPage();
+  const token = localStorage.getItem('token');
+  if (token) {
+    showDashboardPage(token);
+  }
 
   $('#btn-login-to-register').on('click', function() {
     $('#login-right').hide();
@@ -31,7 +33,8 @@ $(document).ready(function() {
     .done(function(res) {
       $('#login-register').hide();
       $('#dashboard').show();
-      // console.log(res.message);
+      localStorage.setItem('token', res.token);
+      showDashboardPage(res.token);
     })
     .fail(function(req, status, err) {
       if (status === 'error') {
@@ -39,6 +42,11 @@ $(document).ready(function() {
         console.log(req, status, err);
       }
     })
+  })
+
+  $('#logout').on('click', function() {
+    signOut();
+    localStorage.clear();
   })
 
 })

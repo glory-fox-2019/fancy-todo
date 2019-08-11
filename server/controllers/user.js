@@ -4,6 +4,10 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const { jwtSign, jwtVerify } = require('../helper/jwt');
 
 class UserController {
+  static authentication(req, res, next) {
+    res.status(200).json({status: true});
+  }
+
   static findAll(req, res, next) {
 
   }
@@ -14,12 +18,13 @@ class UserController {
     User.findOne({username})
     .then(one => {
       if (one && one.password === password) {
-        res.status(200).json({message: "berhasil sign in"});
+        const {username, full_name, email} = one;
+        const token = jwtSign({username, full_name, email});
+        res.status(200).json({token});
       } else {
         res.status(403).json({message: "gagal sign in"});
       }
     })
-
   }
 
   static googleSignIn(req, res, next) {

@@ -17,6 +17,8 @@ app.use(express.json());
 // ROUTE 
 const user = require('./routes/user');
 app.use('/user', user);
+const todo = require('./routes/todo');
+app.use('/todo', todo);
 
 app.listen(3000, () => {
   console.log(`Server >>>>>> 3000!`)
