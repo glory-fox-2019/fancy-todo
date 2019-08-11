@@ -8,7 +8,7 @@ routes.post('/',controller.create)
 routes.get('/',controller.read)
 
 routes.get('/:id',auth.authorization,controller.findOne)
-routes.put('/:id',auth.authorization,controller.update)
+routes.patch('/:id',auth.authorization,controller.update)
 routes.delete('/:id',auth.authorization,controller.delete)
 
 

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="902966078686-m6kjfq82mr79kfj8rrj9cfm8p6ssfpj6.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>fancy-toDo</title>
+    <style>
+        .navbar {
+            min-height: 80px;
+        }
+
+        .navbar-brand {
+            padding: 0 15px;
+            height: 80px;
+            line-height: 80px;
+        }
+
+        .nav-item{
+            font-size: 20px
+        }
+
+        .btn{
+            background-color: #f80000c5;
+            color : white;
+            width : 100%;
+            height : 40px;
+            
+        }
+
+        #formLogin, #formRegister{
+            color:black;
+        }
+
+        #logout{
+            background-color: #ff5100fb;
+            color : white;
+            border-radius : 10%;
+            width : 100%;
+            height : 100%;
+            
+        }
+
+        #landingPage, #formRegister {
+            display: none
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #bb3434;">
+        <span class="navbar-brand mb-0 h1"> <h1>fancy-toDo</h1></span>
+        <div class="collapse navbar-collapse nav justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link active" id="logout" onclick="signOut()">logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="landingPage">
+        <div class="container-fluid pt-4 pl-5 pr-4">
+           <div class="row">
+               <div class="col-sm-4" style="background-color: rgba(245, 0, 0, 0.192)">
+                   <div class="card text-white mt-3 mb-3" style="background-color: #fd0000">
+                       <div class="card-header">Essential</div>
+                       <div class="card-body">
+                               <h5 class="card-title">Keep remembering stuff!</h5>
+                               <p class="card-text">Don't miss your important event and agenda. One thing just happened once.</p>
+                       </div>
+                   </div>
+    
+                   <div class="card text-white mb-3" style="background-color: #ff9d00">
+                       <div class="card-header">Additional</div>
+                       <div class="card-body">
+                           <h5 class="card-title">Organize your time!</h5>
+                           <p class="card-text">Helping you in organize your life and make your time worthy.</p>
+                       </div>
+                   </div>
+                           
+                   <div class="card text-white mb-5" style="background-color: #f8005f">
+                       <div class="card-header">Fancy feature(s)</div>
+                       <div class="card-body">
+                           <h5 class="card-title">See more..</h5>
+                           <p class="card-text">Get yourself amazed with our fancy features in organize your todos.</p>
+                       </div>
+                  </div>
+               </div>
+    
+               <div class="col-sm-4">
+                    <img src= "img/documents-1920461_960_720.png">
+               </div>
+    
+               <div class="col-sm-4">
+               <div class="card text-white mt-3 mb-3" style="background-color: #ffffff">
+                
+                       <div class="card-body" id="formLogin" >
+                           <form >
+                               <div class="form-group">
+                                   <label for="email">E-mail:</label>
+                                   <input type="email" class="form-control" id="email">
+                               </div>
+                               <div class="form-group">
+                                   <label for="pwd">Password:</label>
+                                   <input type="password" class="form-control" id="pwd">
+                               </div>
+                               <button type="submit" class="btn btn-default" onclick="loginUser()">login</button> 
+                               <hr>
+                               <center>  <div class="g-signin2" data-onsuccess="onSignIn"></div></center>
+                               <hr>
+                               <center><span>Doesn't have an account?</span></center>
+                               <center><span>Register <a href="#" onclick="showRegister()">here</a> </span></center>
+                               <hr>     
+                           </form>
+                            
+    
+                       </div>
+
+                       <div class="card-body" id="formRegister" >
+                           <form >
+                                <div class="form-group">
+                                    <label for="nameR">Name:</label>
+                                    <input type="text" class="form-control" id="nameR">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="emailR">E-mail:</label>
+                                    <input type="email" class="form-control" id="emailR">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="pwdR">Password:</label>
+                                    <input type="password" class="form-control" id="pwdR">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="bdayR">Birthday:</label>
+                                    <input type="date" class="form-control" id="bdayR">
+                                </div>
+    
+                                <button type="submit" class="btn btn-default" onclick="createUser()">register</button> 
+                                <hr>
+                                <center><span>Already have an account?</span></center>
+                                <center><span>Login <a href="#" onclick="showLogin()">here</a> </span></center>
+                                <hr>     
+                              
+                            </form>
+                        </div>
+
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
+
+    <div id="dashboard">
+        <div class="container-fluid pt-4 pl-5 pr-4">
+           <div class="row">
+               <div class="col-sm-4">       
+                   <div class="card text-white mt-3 mb-3" >
+                       <div class="card-body">
+                           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                               <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true" onclick="findAll()" >All Todo(s)</a>
+                               <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-profile" aria-selected="false" onclick="create()">New Todo</a>
+                           </div>
+
+                        </div>
+                    </div>
+                </div>
+            
+                
+               <div class="col-sm-8">
+                    <div class="card" >
+                            <div id="viewall">
+
+
+                            </div>
+                            
+                            <div id="editform">
+
+
+                                </div>
+
+                            <div id="createForm">
+                                <form class = "ml-4 mt-4 mb-4 mr-4" >
+                                    <div class="form-group">
+                                        <label for="nameTodo">Task:</label>
+                                        <input type="text" class="form-control" id="nameTodo">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="desc">Description:</label>
+                                        <input type="text" class="form-control" id="desc">
+                                    </div>
+
+        
+                                    <div class="form-group">
+                                        <label for="due">Due date:</label>
+                                        <input type="date" class="form-control" id="due">
+                                    </div>
+        
+                                    <button type="submit" class="btn btn-default" onclick="createtodo()">Create!</button> 
+                                </form>
+
+                             </div>
+
+
+            
+                     </div>
+               </div>
+    
+           </div>
+       </div>
+    </div>
+
+    
+    <footer class="page-footer font-small pt-4 mt-5" style="background-color: #ebebeb">
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">Fancy Todo</h5>
+                    <p>Fancy todo is web-app-based</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <h5 class="text-uppercase">Links</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                 <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                 <a href="#!">Link 4</a>
+                             </li>
+                        </ul>
+                
+                    </div>
+
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <h5 class="text-uppercase">Links</h5>
+                         <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <p> M Romi Ario</p>
+            </div>
+
+    </footer>
+
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+        </script>
+        <script src="./js/main.js"></script>
+        <script src="./js/update-delete.js"></script>
+        <script src="./js/save.js"></script>
+        <script src="./js/update.js"></script>
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+        
+</body>
+</html>

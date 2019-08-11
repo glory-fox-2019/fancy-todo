@@ -3,11 +3,11 @@ const Todo = require('../models/Todo')
 
 class ControllerTodos{
     static create(req,res,next){
-        const {name,description,status,due} = req.body
+        const {name,description,due} = req.body
         Todo.create({
             name,
             description,
-            status,
+            status :false,
             due,
             user : req.decoded._id
         })
@@ -40,15 +40,14 @@ class ControllerTodos{
     }
 
     static update(req,res,next){
+        let obj = {}
         const {name,status,description,due} = req.body
+        if(name) obj.name = name
+        if(status) obj.status = status
+        if(description) obj.description =description
+        if(due) obj.due = due
         console.log(req.params.id);
-        Todo.where('_id',req.params.id).update(
-            {
-                name,
-                status,
-                description,
-                due
-            })
+        Todo.where('_id',req.params.id).update(obj)
         .then((data)=>{
             console.log(data);
             res.json({message: "data is updated"})
