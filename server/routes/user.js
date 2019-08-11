@@ -1,16 +1,12 @@
 const router = require('express').Router()
+const UserController = require('../controllers/user')
 
 router.get('/',(req,res) => {
     res.send('aaaa')
 })
 
-router.post('/login',function(req,res,next){
-    console.log("aaaas")
-    res.json("LOGIN")
-})
+router.post('/login',UserController.login)
 
-router.post('/register',function(req,res,next){
-    res.json("REGISTER")
-})
+router.post('/register',UserController.register)
 
 module.exports = router

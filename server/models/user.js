@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
+const {createPassword} = require('../helpers/bcrypt')
 
 const userSchema = new Schema({
     firstname : {
@@ -18,10 +19,13 @@ const userSchema = new Schema({
     password : {
         type : String,
         required: true
-    }
+    },
+    // todo_list : [{ type: Schema.Types.ObjectId, ref:'Todo'}]
 })
 
-
+userSchema.pre('save',function (){
+    this.password = createPassword(this.password)
+})
 
 const User = mongoose.model('User',userSchema)
 
