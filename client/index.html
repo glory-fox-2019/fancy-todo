@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id" content="140215528248-i76s3av8sq52a1qv7ashtqb4ampgg9pj.apps.googleusercontent.com">
+  <title>Fancy TODO</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/7d2e19e386.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <div id="logo">J</div>
+      TODO app
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Signup</a>
+        </li>
+        <li class="nav-item" id="usernamePlace">
+          
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="root">
+    <div class="container-fluid" id="hero">
+      <div id="text">
+        <h1>Easily organize <span>your</span> todo <span>List</span></h1>
+        <p>With todo app, you can easily organize all your todo list, and you will never forget things anymore.</p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+          Let's start
+        </button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
+      <div id="image">
+        <img src="images/undraw_updates_et2k.svg">
+      </div>
+    </div>
+    <div class="container-fluid" id="todo-container">
+      <div id="listTodo">
+        <div class="todo-heading">
+          <div>
+            <h2>Your todo list</h2>
+            <p>Create your todo list and finish on schedule</p>
+          </div>
+          <div>
+            <button class="btn btn-info" data-toggle="modal" data-target="#addTodoModal"><i class="fas fa-plus"></i>New todo</button>
+          </div>
+        </div>
+        <div class="todo-body" id="itemTodoContainer">
+          <!-- Data laod disini -->
+        </div>
+      </div>
+      <div id="done">
+        <div class="todo-heading">
+          <div>
+            <h2>Completed todo</h2>
+            <p>Create your todo list and finish on schedule</p>
+          </div>
+        </div>
+        <div class="todo-body" id="doneTodoContainer"
+          <!-- Data Load disini -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div id="loginErrorList">
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" required aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" required placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="loginButton">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Create an account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="signupForm">
+            <div id="signupErrorList">
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="firstName">Firstname</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Enter firstname" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="lastName">Lastname</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Enter lastname" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="emailSignup">Email</label>
+              <input type="email" class="form-control" id="emailSignup" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+              <label for="passwordSignup">Password</label>
+              <input type="password" class="form-control" id="passwordSignup" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+              <label for="repasswordSignup">Retype Password</label>
+              <input type="password" class="form-control" id="repasswordSignup" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="signupButton">
+              Signup
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="updateTodoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTodoModalLabel">Create new todo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addTodoForm">
+            <div id="addTodoErrorList">
+            </div>
+            <div class="form-group">
+              <label for="titleTodo">Title</label>
+              <input type="text" class="form-control" id="titleTodo" placeholder="Enter todo title" required>
+            </div>
+            <div class="form-group">
+              <label for="descriptionTodo">Description</label>
+              <input type="text" class="form-control" id="descriptionTodo" placeholder="Enter todo description" required>
+            </div>
+            <div class="form-group">
+              <label for="deadlineTodo">Deadline</label>
+              <input type="date" class="form-control" id="deadlineTodo" placeholder="Enter todo deadline" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="addTodoButton">
+              Create Todo
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateTodoModal" tabindex="-1" role="dialog" aria-labelledby="updateTodoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateTodoModalLabel">Update todo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="updateTodoForm">
+            <div id="updateTodoErrorList">
+            </div>
+            <div class="form-group">
+              <label for="titleTodo">Title</label>
+              <input type="text" class="form-control" id="titleUpdateTodo" placeholder="Enter todo title" required>
+            </div>
+            <div class="form-group">
+              <label for="descriptionTodo">Description</label>
+              <input type="text" class="form-control" id="descriptionUpdateTodo" placeholder="Enter todo description" required>
+            </div>
+            <div class="form-group">
+              <label for="deadlineTodo">Deadline</label>
+              <input type="date" class="form-control" id="deadlineUpdateTodo" placeholder="Enter todo deadline" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="updateTodoButton">
+              Update todo
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="script.js"></script>
+  <script src="scriptTodo.js"></script>
+  <script src="scriptGoogle.js"></script>
+</body>
+</html>
