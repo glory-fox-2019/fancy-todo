@@ -1,10 +1,10 @@
 const base_url = "http://localhost:3000"
 
-function googleSignIn(googleUser) {
+function onSignIn(googleUser) {
     const id_token = googleUser.getAuthResponse().id_token
     axios({
         method: "post",
-        url: `${server}/github/signIn`,
+        url: `${base_url}/home/user/signInGoogle`,
         data: {
             id_token
         }
@@ -117,7 +117,7 @@ function loadTodo() {
     .then(response => {
         let todo = response.data;
         todo.forEach((el) => {
-            $("#todo-list").append(`
+            $("#todo-list").prepend(`
             <div class="card teal lighten-1">
             <div id="todo${el._id}" class="card-content white-text">
               <span class="card-title" style="text-align: center"><b>${el.name}</b></span>
@@ -188,7 +188,6 @@ function createTodo() {
                     timer:  1500
                 })
                 $("#todo-list").empty()
-                $("#todo-list").append(`<li class="collection-header" style="list-style-type: none"><h4>Your Todo List</h4></li>`)
                 loadTodo()
             })
             .catch(err => {
@@ -222,7 +221,7 @@ function deleteTodo(id) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Next &rarr;',
+        confirmButtonText: 'Delete',
       }).then((result) => {
         if (result.value) {
             axios({
@@ -241,7 +240,6 @@ function deleteTodo(id) {
                     timer:  1500
                 })
                 $("#todo-list").empty()
-                $("#todo-list").append(`<li class="collection-header" style="list-style-type: none"><h4>Your Todo List</h4></li>`)
                 loadTodo()
             })
             .catch(err => {
@@ -333,7 +331,6 @@ function updateTodo(id) {
             })
             setTimeout(() => {
                 $("#todo-list").empty()
-                $("#todo-list").append(`<li class="collection-header" style="list-style-type: none"><h4>Your Todo List</h4></li>`)
                 loadTodo()
             }, 1800)
         })
@@ -363,6 +360,8 @@ function signOut() {
         })
         setTimeout(() => {
             $("nav").toggle()
+            $("#todo-list").empty()
+            $("#username").empty()
             $("#home-page").toggle()
             $("#login").toggle()
         }, 1800)
@@ -380,6 +379,8 @@ function signOut() {
             })
             setTimeout(() => {
                 $("nav").toggle()
+                $("#todo-list").empty()
+                $("#username").empty()
                 $("#home-page").toggle()
                 $("#login").toggle()
             }, 1800)
@@ -406,6 +407,11 @@ $(document).ready(function () {
     $("#btn-register").click(function () {
         $("#login").hide()
         $("#register").show()
+    })
+
+    $("#register-back").click(function() {
+        $("#login").show()
+        $("#register").hide()
     })
 
     $("#form_register").submit(function (event) {

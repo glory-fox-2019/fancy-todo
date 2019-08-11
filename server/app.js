@@ -9,6 +9,8 @@ const errHandler = require('./middlewares/errhandler')
 const PORT = process.env.PORT || 3000;
 const app = express()
 
+const notification = require('./helpers/cron')
+
 mongoose.connect('mongodb://localhost:27017/fancy-todo', {useNewUrlParser: true}, function (err) {
     if (err) {
         console.log(err)
@@ -21,6 +23,8 @@ mongoose.connect('mongodb://localhost:27017/fancy-todo', {useNewUrlParser: true}
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+notification()
 
 app.use('/home', routes)
 

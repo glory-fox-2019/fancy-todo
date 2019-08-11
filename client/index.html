@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <meta name="google-signin-client_id" content="935122358437-c7ssa8tbgpj76dthhv0151eru4spbedj.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="319004380015-2nakvt04dc5u7a7qr6s4a2d2tvm6mp74.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Fancy Todo</title>
 </head>
@@ -49,6 +49,7 @@
                             <input id="register_email" type="text" placeholder="email">
                             <input id="register_password" type="password" placeholder="password">
                         </div>
+                        <button id="register-back" class="btn waves-effect waves-light" style="float: right;">Back</button>
                         <button id="btn-signUp" class="btn waves-effect waves-light" type="submit">Sign Up</button>
                     </form>
                 </div>
@@ -58,13 +59,13 @@
         <section id="home-page">
             <div class="row">
                 <div class="col s8">
+                    <li class="collection-header" style="list-style-type: none"><h4>Your Todo List</h4></li>
                     <div id="todo-list">
-                        <li class="collection-header" style="list-style-type: none"><h4>Your Todo List</h4></li>
                     </div>
                 </div>
                 <div class="col s4">
-                    <div id="Option">
-                        <li id="username" class="collection-header" style="list-style-type: none"></li>
+                    <li id="username" class="collection-header" style="list-style-type: none"></li>
+                        <div id="Option">
                         <div class="collection">
                             <a href="#!" class="collection-item" onclick="createTodo()">Click here, to create your new activity !</a>
                         </div>
@@ -73,8 +74,8 @@
             </div>
         </section>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
