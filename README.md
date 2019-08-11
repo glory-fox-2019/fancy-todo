@@ -43,6 +43,7 @@ __BASE URL__ http:localhost/8080
  <b> POST </b> http:localhost/8080/todo/create <br>
 
 <b> Header <b> <br>
+
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -60,6 +61,7 @@ __BASE URL__ http:localhost/8080
  <b> GET </b> http:localhost/8080/todo/gettodo <br>
 
 <b> Header <b> <br>
+
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -69,6 +71,7 @@ __BASE URL__ http:localhost/8080
  <b> GET </b> http:localhost/8080/todo/getbyid/:id <br>
 
 <b> Header <b> <br>
+
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -83,6 +86,7 @@ __BASE URL__ http:localhost/8080
  <b> PATCH </b> http:localhost/8080/todo/updatetodo/:id <br>
 
 <b> Header <b> <br>
+
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
@@ -100,6 +104,7 @@ __BASE URL__ http:localhost/8080
  <b> DELETE </b> http:localhost/8080/todo/delete/:id <br>
 
 <b> Header <b> <br>
+
 | Name                   | Description           |
 | ---------------------- |:----------------------|
 | Token                  | String (require)      |
