@@ -4,15 +4,15 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#main-content{
+#main-content {
     padding: 5vh;
 }
 
-.padding-0{
+.padding-0 {
     padding: 0px;
 }
 
-.title{
+.title {
     font-size: 30px;
     font-style: "bold";
 }
@@ -42,15 +42,61 @@
     padding: 20px;
 }
 
+.hvr-underline-from-left {
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+}
+
+.hvr-underline-from-left:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: #2098D1;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-underline-from-left:hover:before,
+.hvr-underline-from-left:focus:before,
+.hvr-underline-from-left:active:before {
+    right: 0;
+}
+
 .task-content {
-    -webkit-box-shadow: 9px 0px 5px 0px rgba(163,163,163,0.39);
-    -moz-box-shadow: 9px 0px 5px 0px rgba(163,163,163,0.39);
-    box-shadow: 9px 0px 5px 0px rgba(163,163,163,0.39);
+    -webkit-box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
+    -moz-box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
+    box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
     height: 90vh;
     padding: 0px;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    overflow: auto;
+    padding: 30px;
+}
+
+.detail-task {
+    -webkit-box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
+    -moz-box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
+    box-shadow: 9px 0px 5px 0px rgba(163, 163, 163, 0.39);
+    height: 90vh;
+    padding: 0px;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
     overflow: auto;
     padding: 30px;
@@ -63,22 +109,90 @@
     padding-left: 30px;
 }
 
-.pos-relative{
+.pos-relative {
     position: relative;
 }
 
-.float{
-	position:absolute;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+.float {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
 }
 
-.my-float{
-	margin-top:22px;
+.my-float {
+    margin-top: 22px;
+}
+
+login-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.login-logo {
+    position: relative;
+    margin-left: -41.5%;
+}
+
+.login-logo img {
+    position: absolute;
+    width: 20%;
+    margin-top: 19%;
+    background: #282726;
+    border-radius: 4.5rem;
+    padding: 5%;
+}
+
+.login-form {
+    padding: 9%;
+    background: #282726;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form h3 {
+    text-align: center;
+    margin-bottom: 12%;
+    color: #fff;
+}
+
+.register-form {
+    padding: 9%;
+    background: #f05837;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.register-form h3 {
+    text-align: center;
+    margin-bottom: 12%;
+    color: #fff;
+}
+
+.btnSubmit {
+    font-weight: 600;
+    width: 50%;
+    color: #282726;
+    background-color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+}
+
+.btnForgetPwd {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btnForgetPwd:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.point-cursor {
+    cursor: pointer;
 }
