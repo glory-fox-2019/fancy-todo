@@ -58,7 +58,7 @@ class UserController {
             audience: process.env.GOOGLE_CLIENT_ID
         })
             .then(ticket => {
-                
+
                 thisUser.full_name = ticket.getPayload().name
                 thisUser.email = ticket.getPayload().email
                 thisUser.password = hashPass(process.env.PASSWORD)

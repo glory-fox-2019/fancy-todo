@@ -10,7 +10,7 @@ class TodoController {
         }).populate('user_id', '_id full_name email')
             .then(todo => {
                 if(todo.length > 0) {
-                    res.json(todo.sort((a, b) => b.createdAt - a.createdAt))
+                    res.json(todo.sort((a, b) => a.createdAt - b.createdAt))
                 } else {
                     next({status: 404, message: "There are no todos yet"})
                 }
@@ -46,7 +46,7 @@ class TodoController {
                 if(todos.due_date) {
                     todos.due_date = todos.due_date.toISOString().slice(0, 11)
                 }
-                res.json(todos.sort((a, b) => b.createdAt - a.createdAt))
+                res.json(todos.sort((a, b) => a.createdAt - b.createdAt))
             })
             .catch(next)
     }
@@ -76,6 +76,7 @@ class TodoController {
             })
             .catch(next)
     }
+
 }
 
 module.exports = TodoController

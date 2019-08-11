@@ -22,7 +22,8 @@ $(document).ready(function(){
             data: sendData
         })
             .done(function(data) {
-                addTokenAfterSigned(data.token)
+                console.log(data)
+                addTokenAfterSigned(data)
 
             })
             .fail(function(err) {
@@ -43,6 +44,7 @@ $(document).ready(function(){
             data: sendData
         })
             .done(function(data) {
+                document.documentElement.scrollTop = 0;
                 addTokenAfterSigned(data)
             })
             .fail(function(err) {
@@ -83,6 +85,7 @@ $(document).ready(function(){
        })
         .done(function(todos) {
             console.log(todos)
+            $('#todo-lists').empty()
             populateTodos(todos)
         })
    })
@@ -103,6 +106,8 @@ $(document).ready(function(){
            }
        })
             .done( function(newTodo) {
+                
+                populateTodos([newTodo])
                 console.log(newTodo)
             })
    })
@@ -119,6 +124,7 @@ function onSignIn(googleUser) {
         data: {id_token}
     })
         .done( signedInUser => {
+            document.documentElement.scrollTop = 0;
             addTokenAfterSigned(signedInUser)
             console.log("User sign in")
         })
@@ -126,16 +132,17 @@ function onSignIn(googleUser) {
     
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
-        localStorage.removeItem("loggedIn")
-        localStorage.removeItem("token")
         auth2.signOut().then(function () {
+            localStorage.removeItem("loggedIn")
+            localStorage.removeItem("token")
             $('#todo-lists').empty()
             $('#first-pop-up').css('visibility', 'visible')
             $('#google-button').css('visibility', 'visible')
             $('#sign-out').css('visibility', 'hidden')
             $('#content').css('display', 'none')
-          console.log('User signed out.');
+            console.log('User signed out.');
         });
+
       }
 
 function showError(message) {
@@ -146,7 +153,7 @@ function showError(message) {
 function addTokenAfterSigned(data) {
     localStorage.setItem("token", data.token)
     localStorage.setItem("loggedIn", data.full_name)
-    // localStorage.setItem("registeredUser", data.full)
+    console.log(localStorage)
     $('#first-pop-up').css('visibility', 'hidden')
     $('#google-button').css('visibility', 'hidden')
     $('#error-message').css('visibility', 'hidden')
@@ -155,6 +162,7 @@ function addTokenAfterSigned(data) {
     $('form').find("input[type=password], textarea").val("")
     $('#content').css('display', 'block')
     $('#welcome').text(`Welcome ${data.full_name}`)
+    $('#todo-lists').empty()
     loadTodoList()
 }
 
@@ -170,12 +178,13 @@ function loadTodoList() {
     })
         .done(function(todos){
             console.log(todos)
+            $('#todo-lists').empty()
             populateTodos(todos)
         })
 }
 
 function populateTodos(list) {
-    $('#todo-lists').empty()
+    
             list.forEach(function(td, idx) {
                 $('#todo-lists').prepend(`
                 <div class="card">
