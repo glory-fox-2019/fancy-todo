@@ -22,21 +22,21 @@ http://localhost:3000
 ### All the Todos APIs below referenced to the authenticated User's "Todos"
 |  HTTP  | Endpoint | Headers | Body | Description | Reference |
 |---|---|---|:-:|---|---|
-| POST | /todos/add | {token: String} | name: string<br>description: string<br>due_date: date | Register new user |[Create Todo]()|
-| POST | /todos/search | {token: String} | none | Search authenticated user todos |[Search Todo]()|
-| GET | /todos/:todoId | {token: String} | none | Get one authenticated user todo |[Get One Todo]()|
-| PATCH | /todos/:todoId/status | {token: String} | none | Change authenticated user todo |[Change Todo Status]()|
-| PATCH | /todos/:todoId/edit | {token: String} | name: string<br>description: string<br>due_date: date | Edit authenticated user todo |[Edit Todo]()|
-| DELETE | /todos/:todoId/delete | {token: String} |  | Delete authenticated user todo |[Delete Todo]()|
+| POST | /todos/add | {token: String} | name: string<br>description: string<br>due_date: date | Register new user |[Create Todo](https://github.com/tyogautomo/fancy-todo-1#create-todo)|
+| POST | /todos/search | {token: String} | none | Search authenticated user todos |[Search Todo](https://github.com/tyogautomo/fancy-todo-1#search-authenticated-user-todos)|
+| GET | /todos/:todoId | {token: String} | none | Get one authenticated user todo |[Get One Todo](https://github.com/tyogautomo/fancy-todo-1#get-one-authenticated-user-todo)|
+| PATCH | /todos/:todoId/status | {token: String} | none | Change authenticated user todo |[Change Todo Status](https://github.com/tyogautomo/fancy-todo-1#change-authenticated-user-todo-status)|
+| PATCH | /todos/:todoId/edit | {token: String} | name: string<br>description: string<br>due_date: date | Edit authenticated user todo |[Edit Todo](https://github.com/tyogautomo/fancy-todo-1#edit-authenticated-user-todo-status)|
+| DELETE | /todos/:todoId/delete | {token: String} |  | Delete authenticated user todo |[Delete Todo](https://github.com/tyogautomo/fancy-todo-1#delete-authenticated-user-todo-status)|
 
 ## Project API
 ### All the Todos APIs below referenced to the authenticated User's "Project Todos"
 |  HTTP  | Endpoint | Headers | Body | Description | Reference |
 |---|---|---|:-:|---|---|
-| GET | /projects | {token: String} | none | Get authenticated user projects |[Get All Projects]()|
-| GET | /projects/:projectId | {token: String} | none | Get one authenticated user project |[Get One Project]()|
-| POST | /projects | {token: String} | name: string<br>description: string<br> | Create project |[Create Project]()|
-| PATCH | /projects/:projectId | {token: String} | name: string<br>description: string<br> | Edit authenticated user project |[Edit Project]()|
+| GET | /projects | {token: String} | none | Get authenticated user projects |[Get All Projects](https://github.com/tyogautomo/fancy-todo-1#get-authenticated-user-projects)|
+| GET | /projects/:projectId | {token: String} | none | Get one authenticated user project |[Get One Project](https://github.com/tyogautomo/fancy-todo-1#get-one-authenticated-user-project)|
+| POST | /projects | {token: String} | name: string<br>description: string<br> | Create project |[Create Project](https://github.com/tyogautomo/fancy-todo-1#create-project)|
+| PATCH | /projects/:projectId | {token: String} | name: string<br>description: string<br> | Edit authenticated user project |[Edit Project](https://github.com/tyogautomo/fancy-todo-1#update-an-authenticated-user-project)|
 | DELETE | /projects/:projectId | {token: String} | none | Delete authenticated user project |[Delete Project]()|
 | POST | /projects/invite | {token: String} | email: string | Invite member to an authenticated user Project |[Invite Member]()|
 | POST | /projects/remove-member | {token: String} | email: string | Remove member from an authenticated user Project |[Remove Member]()|
@@ -476,43 +476,6 @@ http://localhost:3000
     }
     ```
 
-+ ### Get Authenticated User Projects
-  method: `GET`<br>
-  endpoint: `/projects`
-  
-  #### _Request_ :
-  * headers
-    ```javascript
-    {
-        token: {jwt token}
-    }
-    ```
-    
-  #### _Response_ :
-  - 200
-    ```javascript
-    [{
-        _id: 5d4fe61aa63cce6ba314c1ed,
-        name: 'asdasd',
-        description: 'asdasd',
-        members: [
-            "jajHAhsdgshasha72d2hbH0e"
-        ],
-        todos: [],
-        UserId: "jajHAhsdgshasha72d2hbH0e"
-        __v: 0 
-    },
-    ....
-    ]
-    ```
-  - 401<br>
-    ```javascript
-    {
-      "code": 401,
-      "message": "Unauthorized Process"
-    }
-    ```
-
 + ### Get One Authenticated User Project
   method: `GET`<br>
   endpoint: `/projects/:projectId`
@@ -596,7 +559,7 @@ http://localhost:3000
     }
     ```
 
-+ ### Update an Authenticated User Project
++ ### Delete an Authenticated User Project
   method: `DELETE`<br>
   endpoint: `/projects/:projectId`
   
