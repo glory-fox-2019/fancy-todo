@@ -41,7 +41,10 @@ if (localStorage.getItem('token')) {
 
     $('a.home-switch').removeClass('homebase').addClass('home')
     $('.user-name').append(`${localStorage.name}`)
+    $('.logged-user-name').html(`${localStorage.name}`)
 
+    $('.logged-user-name').show()
+    $('.user-prof-pic').show()
     $('.logout').show()
     $('.todo-btn').show()
     $('.project-btn').show()
@@ -212,6 +215,7 @@ function loginPost() {
 
                 $('.welcome').append(`${localStorage.getItem('name')}`)
                 $('a.home-switch').removeClass('homebase').addClass('home')
+                $('.logged-user-name').html(`${localStorage.name}`)
 
                 $('.logout').show()
                 $('.todo-btn').show()
@@ -219,6 +223,8 @@ function loginPost() {
                 $('.goto').show()
                 $('.project-btn').show()
                 $('.welcome-title').show()
+                $('.logged-user-name').show()
+                $('.user-prof-pic').show()
 
                 $('.login-btn').hide()
                 $('.register-form').hide()

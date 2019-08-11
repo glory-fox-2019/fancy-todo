@@ -23,6 +23,7 @@ function onSignIn(googleUser) {
             $('.user-name').empty()
             $('.user-name').append(`${localStorage.getItem('name')}`)
             $('a.home-switch').removeClass('homebase').addClass('home')
+            $('.logged-user-name').html(`${localStorage.name}`)
 
             $('.todos-list').empty()
 
@@ -32,6 +33,8 @@ function onSignIn(googleUser) {
             $('.user-page').show()
             $('.todos-list').show()
             $('.project-btn').show()
+            $('.logged-user-name').show()
+            $('.user-prof-pic').show()
 
             $('.login-btn').hide()
             $('.register-form').hide()
@@ -53,12 +56,12 @@ function signOut() {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: "You will be logged out after this!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, log me out!'
     }).then((result) => {
         if (result.value) {
             auth2.signOut().then(function () {
@@ -74,6 +77,8 @@ function signOut() {
             $('.project-btn').hide()
             $('.project-page-container').hide()
             $('.projects-list-container').hide()
+            $('.logged-user-name').hide()
+            $('.user-prof-pic').hide()
 
             $('.login-btn').show()
             $('.register-form').show()
