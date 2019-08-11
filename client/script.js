@@ -58,7 +58,15 @@ function home(user) {
             ------------------------------------------------------
             </div>`)
         }
-        
+        $.ajax({
+            url: 'https://api.adviceslip.com/advice',
+            method: 'GET'
+        })
+        .done(function(quote) {
+            let json = JSON.parse(quote)
+            $('#content-container').append(`
+            <h3>${json.slip.advice}</h3`)
+        })
     }) 
 }
 
