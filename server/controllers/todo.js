@@ -3,9 +3,8 @@ const User = require('../models/user');
 const { jwtSign, jwtVerify } = require('../helper/jwt');
 
 class TodoController {
-  static findAll(req, res, next) {
+  static showDashboard(req, res, next) {
     const payload = jwtVerify(req.params.token);
-    console.log(payload, req.params.token);
     if (!payload.username) {
       res.status(403).json({ status: false })
     }
@@ -13,7 +12,6 @@ class TodoController {
       username: payload.username
     })
     .then(one => {
-      console.log(one);
       return Todo.find({
         user_id: one._id
       })
@@ -27,10 +25,14 @@ class TodoController {
   }
 
   static createTodo(req, res, next) {
-    const { todo, desc, due_date, user_id } = req.body;
-
-    Todo.create({ todo, desc, due_date, user_id, status: false })
+    const { todo, desc, due_date, token } = req.body;
+    const payload = jwtVerify(token);
+    User.findOne({ username: payload.username })
+    .then(one => {
+      return Todo.create({ todo, desc, due_date: Date(due_date), user_id: one._id, status: false })
+    })
     .then(data => {
+      console.log('berhasil create');
       res.status(201).json(data);
     })
     .catch(err => {
@@ -49,8 +51,61 @@ class TodoController {
     })
   }
 
+  static doneTodo(req, res, next) {
+    const payload = jwtVerify(req.params.token);
+    User.findOne({ username: payload.username })
+    .then(user => {
+      return Promise.all([user, Todo.findOne({ _id: req.params.todo_id })])
+    })
+    .then(result => {
+      let user = String(result[0]._id);
+      let todo = String(result[1].user_id);
+      if (user === todo) {
+        return Todo.updateOne({ _id: result[1]._id }, {status: true})
+      } else {
+        return false;
+      }
+    })
+    .then(data => {
+      if (data) {
+        console.log('oke');
+        res.status(200).json({message: 'done'});
+      } else {
+        res.status(403);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   static delete(req, res, next) {
-    console.log(req.params);
+    const { todo_id, token} = req.params;
+    const payload = jwtVerify(token);
+    Todo.findOne({
+      _id: todo_id
+    })
+    .then(one => {
+      if (one) {
+        return Todo.deleteOne({
+          _id: one._id
+        })
+      } else {
+        return null;
+      }
+    })
+    .then(info => {
+      if (info) {
+        // console.log(info);
+        res.status(200).json({status: true})
+      } else {
+        res.status(404);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json(err);
+    })
   }
 }
 

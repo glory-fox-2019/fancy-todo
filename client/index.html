@@ -6,9 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-signin-client_id" content="292667409432-fk7udjrtv5bejp2smrie67vf9a82t391.apps.googleusercontent.com">
   <script src="https://kit.fontawesome.com/d00c61de42.js"></script>
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/loading.css">
   <title>Fancy Todo</title>
 </head>
 <body>
@@ -21,7 +23,7 @@
           <header>
             <h1 id="login-header">Sign In</h1>
           </header>
-          <input class="form-control" type="text" name="loginUsername" placeholder="username">
+          <input class="form-control" type="text" name="loginEmail" placeholder="username">
           <input class="form-control" type="password" name="loginPassword" placeholder="password">
           <div class="box-btn">
             <button class="btn btn-lg" id="btn-login">Login</button>
@@ -36,8 +38,8 @@
           <header>
             <h1 id="register-header">Sign Up</h1>
           </header>
-          <input class="form-control" type="text" name="registerUsername" placeholder="username">
-          <input class="form-control" type="text" name="registerEmail" placeholder="email">
+          <input class="form-control" type="text" name="registerUsername" placeholder="fullname">
+          <input class="form-control" type="email" name="registerEmail" placeholder="email">
           <input class="form-control" type="password" name="registerPassword" placeholder="password">
           <div class="box-btn">
             <button class="btn btn-lg" id="btn-register">Register</button>
@@ -78,7 +80,7 @@
       </div>
       <div id="head-info">
         <div id="profile-img-box">
-          <img src="img/profile.jpg" alt="">
+          <img src="" alt="profile_pic">
         </div>
         <div id="name">
           <h4>Hafidz Mahrus</h4>
@@ -86,6 +88,7 @@
         <div id="email">
           <p>imhavus@gmail.com</p>
         </div>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change-profile-modal">Change Profile Pic</button>
         <div id="todo-info">
           <div id="completed-task">
             <h2>10</h2>
@@ -110,8 +113,11 @@
     </div>
     <div class="col-md-4" id="list-task">
       <div class="head-dashboard">
-        <input class="form-control" type="text">
-        <button class="btn btn-outline-primary">Search</button>
+        <header>
+          <h1>List Todo</h1>
+        </header>
+        <!-- <input class="form-control" type="text"> -->
+        <!-- <button class="btn btn-outline-primary">Search</button> -->
       </div>
       <div id="box-list-task">
         
@@ -122,20 +128,23 @@
     </div>
     <div class="col-md-5" id="option-task">
       <div class="head-dashboard">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <header>
+          <h1>Details</h1>
+        </header>
+        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             All Task
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        </a> -->
+        <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        </div> -->
       </div>      
       <div id="head-option-task">
         <div id="profile-option-task">
           <div id="box-img-option-task">
-            <img src="img/profile.jpg" alt="">
+            <img src="" alt="">
           </div>
           <h5>Hafidz Mahrus</h5>
         </div>
@@ -168,14 +177,7 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
-
+  <!-- ============== MODAL ============== -->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -192,35 +194,66 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">To do</span>
             </div>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="create-todo">
           </div>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">To do</span>
+              <span class="input-group-text" id="inputGroup-sizing-default">Desc</span>
             </div>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="create-desc">
           </div>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">To do</span>
+              <span class="input-group-text" id="inputGroup-sizing-default">Due_date</span>
             </div>
-            <input type="text" class="form-control">
+            <input class="datepicker form-control" type="date" id="create-date datepicker">
           </div>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="add-task" >Add Task</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary" id="add-task" >Add Task</button>
         </div>
       </div>
     </div>
+  </div>
+  
+  <div class="modal fade" id="change-profile-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+          <input type='file' name='image'/>
+        </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary" id="change-img-profile">Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="loading-page">
   </div>
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="js/sweetalert2.js"></script>
   <script src="js/function.js"></script>
   <script src="js/main.js"></script>
+  
 </body>
 </html>

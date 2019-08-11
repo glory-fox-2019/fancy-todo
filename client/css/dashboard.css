@@ -25,7 +25,7 @@
   box-shadow: 1px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
-#task-manager h1 {
+#task-manager h1, #list-task h1, #option-task h1 {
   margin-top: 15px;
   font-size: 21px;
   font-weight: 500;
