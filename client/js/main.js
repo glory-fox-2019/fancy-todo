@@ -1,6 +1,36 @@
 const base_url = "http://localhost:3000"
 
-
+function googleSignIn(googleUser) {
+    const id_token = googleUser.getAuthResponse().id_token
+    axios({
+        method: "post",
+        url: `${server}/github/signIn`,
+        data: {
+            id_token
+        }
+    })
+    .then(response => {
+        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("username",response.data.username)
+        localStorage.setItem("signIn", "google")
+        $("#login").hide()
+        $("#home-page").show()
+        $("#username").append(`
+        <h3>Hello ${response.data.username} !</h3>
+        <h4>What are you gonna do today ?</h4>
+        `)
+        loadTodo()
+    })
+    .catch(err => {
+        swal({
+            icon: "error",
+            title: "Login Failed :(",
+            text: err.response.data,
+            button: false,
+            timer: 1500
+        })
+    })
+}
 
 function signIn(email, password) {
     axios({
@@ -21,6 +51,7 @@ function signIn(email, password) {
         })
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("username",response.data.username)
+        localStorage.setItem("signIn", "manual")
         $("#login").hide()
         $("#home-page").show()
         $("#username").append(`
@@ -75,6 +106,7 @@ function register(username, password, email) {
 }
 
 function loadTodo() {
+    $("nav").show()
     axios({
         method: "get",
         url: `${base_url}/home/todo`,
@@ -318,6 +350,42 @@ function updateTodo(id) {
 
 }
 
+function signOut() {
+    const signIn = localStorage.signIn
+    if (signIn === "manual") {
+        localStorage.clear()
+        swal({
+            title: "Bye Bye!",
+            text: `Have a nice day :)!`,
+            icon: "success",
+            button: false,
+            timer:  1500
+        })
+        setTimeout(() => {
+            $("nav").toggle()
+            $("#home-page").toggle()
+            $("#login").toggle()
+        }, 1800)
+    }
+    else if (signIn === "google") {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            localStorage.clear()
+            swal({
+                title: "Bye Bye!",
+                text: `Have a nice day :)!`,
+                icon: "success",
+                button: false,
+                timer:  1500
+            })
+            setTimeout(() => {
+                $("nav").toggle()
+                $("#home-page").toggle()
+                $("#login").toggle()
+            }, 1800)
+        });
+    }
+}
 
 
 
@@ -325,7 +393,7 @@ $(document).ready(function () {
 
     $("#register").hide()
     $("#home-page").hide()
-
+    $("nav").hide()
     $("#form-signIn").submit(function (event) {
         event.preventDefault()
         const email = $("#signIn_email").val()
