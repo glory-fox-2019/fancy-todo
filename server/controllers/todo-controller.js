@@ -32,6 +32,7 @@ class TodoController {
     }
 
     static addTodo(req, res, next) {
+
         const newTodo = {
             name: req.body.name,
             description: req.body.description,
@@ -40,9 +41,10 @@ class TodoController {
         }
 
         Todo.create(newTodo)
-            .then(({created}) => {
+            .then((created) => {
+                const {_id, name, description, due_date, completed} = created
                 let colorCode = colorPicker(created.due_date)
-                res.status(201).json({created, qr_link: colorCode})
+                res.status(201).json({_id, name, description, due_date, completed, qr_link: `http://api.qrserver.com/v1/create-qr-code/?data=Todo: ${_id} Description: ${description} Due: ${due_date.toISOString().slice(0, 10)}&size=100x100&bgcolor=${colorCode}`})
             })
             .catch(next)
     }
@@ -92,7 +94,7 @@ class TodoController {
         const {_id} = req.params
         Todo.deleteOne({_id})
             .then(() => {
-                res.status(204).json({message: "Todo successfuly deleted"})
+                res.status(200).json({message: "Todo successfuly deleted"})
             })
             .catch(next)
     }

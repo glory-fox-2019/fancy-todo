@@ -4,8 +4,9 @@ const Todo = require('../models/todo-model')
 function userAuthentication (req, res, next) {
 
     const {token} = req.headers
-    const currentUser = jwt.verify(token, process.env.JWT_SECRET)
-    if(currentUser) {
+
+    if(token) {
+        const currentUser = jwt.verify(token, process.env.JWT_SECRET)
         req.currentUser = currentUser
         next()
     } else {

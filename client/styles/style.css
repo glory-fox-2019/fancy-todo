@@ -15,6 +15,7 @@ body {
 }
 
 #sign-out {
+    border: 3px solid #404347;
     margin-right: 90px;
     border-radius: 8px;
     padding: 5px;
@@ -75,8 +76,24 @@ body {
     padding-left: 300px;
 }
 
+#welcome {
+    font-size: 23px;
+    padding: 10px;
+}
+
+#filter-todo {
+    text-align: right;
+    width: 300px;
+}
+
 .accordion {
     margin-top: 20px;
+}
+
+.todo-title button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #495054;
 }
 
 #error-message {

@@ -9,6 +9,9 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 class UserController {
     static register(req, res, next) {
         let registered = {}
+        if(!req.body.password) {
+            res.status(400).json({message: "Please enter your password"})
+        }
         const newUserData = {
             full_name: req.body.full_name,
             email: req.body.email,
@@ -30,10 +33,14 @@ class UserController {
     static signin(req, res, next) {
         let loggedIn = {}
         const {email, password} = req.body
+        if(!email || !password) {
+            next({status: 403, message: "Wrong email / password"})
+        }
         User.findOne({email})
             .then(user => {
                 if(user) {
                     if(compareHash(password, user.password)) {
+                        console.log(compareHash(password, user.password))
                         loggedIn._id = user._id
                         loggedIn.full_name = user.full_name
                         loggedIn.email = user.email

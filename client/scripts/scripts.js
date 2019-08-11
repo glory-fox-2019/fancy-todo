@@ -127,7 +127,7 @@ $(document).ready(function(){
         })
    })
 
-   //create a todo listcrea
+   //create a todo list
 
    $('#make-todo').submit(function() {
        event.preventDefault()
@@ -144,7 +144,8 @@ $(document).ready(function(){
                'token': localStorage.getItem('token')
            }
        })
-            .done( function(newTodo) {                
+            .done( function(newTodo) {   
+                console.log(newTodo)             
                 populateTodos([newTodo])
             })
             .fail(function(err) {
@@ -205,7 +206,7 @@ function addTokenAfterSigned(data) {
     $('form').find("input[type=text], textarea").val("")
     $('form').find("input[type=password], textarea").val("")
     $('#content').css('display', 'block')
-    $('#welcome').text(`Welcome ${data.full_name}`)
+    $('#welcome').text(`${data.full_name}'s Todo List`)
     $('#todo-lists').empty()
     loadTodoList()
 }
