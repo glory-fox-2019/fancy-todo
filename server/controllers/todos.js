@@ -14,19 +14,23 @@ class ControllerTodo {
         })
         .catch((err) => {
             // console.log('masuk error')
-            console.log(err)
+            console.log(err, 'masuk siniiiii')
             next(err)
         })
     }
 
     static findAll(req, res, next) {
-        Todo.find()
-        .then((todos) => {
-            res.status(200).json({ todos })
-        })
-        .catch((err) => {
-            next(err)
-        })
+        console.log('masukkk')
+        Todo
+         .find({
+            creator : req.params.id
+         })
+         .then((lists)=> {
+            res.status(200).json(lists)
+         })
+         .catch((err)=> {
+             next(err)
+         })
     }
 
     static findOne(req, res, next) {
@@ -42,8 +46,8 @@ class ControllerTodo {
     }
 
     static update(req, res, next) {
-        Todo.findOne({
-            _id: req.headers._id
+        Todo.findById({
+            _id: req.params._id
         })
         .then((found) => {
             // console.log(found)
