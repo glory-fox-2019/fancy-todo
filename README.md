@@ -6,12 +6,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[Todo Route API](#user-content-todo-route-api)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!](#user-content-notes)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo](#user-content-get-todo)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo/:name](#user-content-get-todo-name)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Get /todo/:name](#user-content-get-todoname)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /todo](#user-content-post-todo)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes!!](#user-content-notes-1)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Delete /todo/:_id](#user-content-delete-todo)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Patch /todo/:_id](#user-content-patch-todo)  
-&nbsp;&nbsp;&nbsp;&nbsp;[User Route API](#user-content-todo-user-api)  
+&nbsp;&nbsp;&nbsp;&nbsp;[User Route API](#user-content-user-route-api)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/register](#user-content-post-userregister)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/signin](#user-content-post-usersignin)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Post /user/googlesignin](#user-content-post-usergooglesignin)  
@@ -183,7 +183,7 @@ On successful update it will display this result
 status 200
 ```
 
-### Todo User API
+### User Route API
 
 #### Post /user/register
 
