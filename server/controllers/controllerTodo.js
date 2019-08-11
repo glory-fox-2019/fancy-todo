@@ -65,6 +65,16 @@ class ControllerTodos{
         })
     }
 
+    static holiday(req,res,next){
+        axios.get('https://date.nager.at/api/v2/nextpublicholidays/ID')
+        .then(({data})=>{
+            res.json(data)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
 
      
 
