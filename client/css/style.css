@@ -1,0 +1,181 @@
+body {
+  background-image: url("https://picsum.photos/1920/1080");
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+}
+
+.navbar--right {
+  float: right;
+}
+
+.navbar .navbar--username {
+  font-size: 35px;
+}
+
+.navbar ul {
+  margin: 0;
+}
+
+.navbar ul li {
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.navbar ul li a {
+  padding: 4px 15px;
+  border-radius: 20px;
+  border: 1px solid currentColor;
+  color: currentColor;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+body > div > .title {
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#todo > div {
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#todo {
+  display: none;
+}
+
+#todo .todo--search {
+  padding: 0;
+}
+
+#todo .todo--search input {
+  padding: 5px 10px;
+  margin-bottom: 0;
+}
+
+#todo .todo--action {
+  background: black;
+}
+
+#todo .todo--list .todo__item .todo__item--action {
+  border-radius: 20px;
+}
+
+#todo .todo--list .todo__item .todo__item--action a {
+  width: 35px;
+  height: 35px;
+}
+
+#todo .todo--list .todo__item .todo__item--action a i {
+  line-height: 1.8;
+  font-size: 20px;
+  color: black;
+}
+
+#todo .todo--list .todo__item .todo__item--dueDate {
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+#todo .todo--list .todo__item .todo__item--dueDate .date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#todo .todo--list .todo__item .todo__item--thumbnail {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  position: relative;
+}
+
+#todo .todo--list .todo__item .todo__item--thumbnail .todo__item--action {
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 20px;
+}
+
+#todo .todo--list .todo__item .todo__item--thumbnail .todo__item--dueDate {
+  position: absolute;
+  display: inline-block;
+  bottom: 10px;
+  left: 10px;
+  background-color: #ffc107;
+}
+
+#todo .todo--list .todo__item .todo__item--bottom {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#todo .todo--list .todo__item .todo__item--essential {
+  display: flow-root;
+}
+
+#todo .todo--list .todo__item .todo__item--essential .todo__item--action {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  float: right;
+}
+
+#todo .todo--list .todo__item .todo__item--essential .todo__item--dueDate {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  float: left;
+  background-color: #ffc107;
+}
+
+.modal .input--desc {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.modal #modal--more--thumbnail--image img {
+  max-width: 100%;
+}
+
+.modal #modal--add--thumbnail--image img {
+  max-width: 100%;
+}
+
+.modal .tag--list .tag {
+  border-radius: 20px;
+  background-color: #ffc107;
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+#signin {
+  display: none;
+  padding: 15px;
+  min-height: 250px;
+  padding-top: 80px;
+}
+
+#signin .title h2 {
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#signin .form {
+  text-align: center;
+}
+
+#signin .form div {
+  display: inline-block;
+}
+/*# sourceMappingURL=style.css.map */

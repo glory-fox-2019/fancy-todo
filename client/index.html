@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id" content="690798081196-p3jao93pmo4pfmp9q4aiihp41adgt92f.apps.googleusercontent.com">
+  <title>Fancy Todo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="navbar navbar--fixed">
+      <ul class="navbar--right">
+        <li class="navbar--username">username</li>
+        <li><a href="#" onclick="signOut()">Logout</a></li>
+      </ul>
+    </div>
+    <div class="title">
+      <h1>Fancy Todo App</h1>
+    </div>
+    <div id="todo" class="card todo">
+      <div class="todo--search">
+        <form id="form--search">
+          <input id="input--search" type="text" class="validate" placeholder="Search...">
+          <!-- <div class="input-field col s6">
+            <label for="input--search">Search</label>
+          </div> -->
+        </form>
+      </div>
+      <div class="todo--action">
+        <a href="#modal--add" class="waves-effect waves-light btn amber black-text modal-trigger" onclick="loadAddTodo()" id="btn--add-todo">Add Todo</a>
+      </div>
+      <div class="todo--list">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+    <div id="signin" class="card">
+      <div class="title">
+        <h2>
+          Sign In
+        </h2>
+      </div>
+      <div class="form">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
+    </div>
+  </div>
+  <div id="modal--more" class="modal todo--more">
+    <div class="modal-content">
+      <div class="row">
+        <form id="modal--more">
+          <input type="hidden" id="modal--more--id" name="id">
+          <div class="input-field col s6">
+            <input id="modal--more--title" type="text" class="validate">
+            <label class="active" for="modal--more--title">Title</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" id="modal--more--dueDate" class="datepicker">
+            <label for="modal--more--dueDate">Due Date</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="modal--more--description" class="materialize-textarea"></textarea>
+            <label for="modal--more--description">Description</label>
+          </div>
+          <div class="col s12">
+            <div class="input-field col s6">
+              <div id="modal--more--thumbnail--image">
+                <img src="https://picsum.photos/1920/1080" alt="Thumbnail">
+              </div>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="modal--more--thumbnail" class="validate"></input>
+              <label for="modal--more--thumbnail">Thumbnail</label>
+              <p class="input--desc">* Type image keyword you want to attach</p>
+            </div>
+          </div>
+          <div class="input-field col s12">
+            <input id="modal--more--tag" type="text" class="validate col s6">
+            <label class="active" for="modal--more--tag">Tag</label>
+          </div>
+          <div id="modal--more--tag--list" class="tag--list">
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <a href="#!" onclick="updateOneTodo()" class="modal-close waves-effect waves-green btn-flat">Save</a>
+      <a href="#!" onclick="" class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+    </div>
+  </div>
+  <div id="modal--add" class="modal todo--add">
+    <div class="modal-content">
+      <div class="title">
+        <h2>Add Todo</h2>
+      </div>
+      <div class="row">
+        <form id="modal--add">
+          <div class="input-field col s6">
+            <input id="modal--add--title" type="text" class="validate">
+            <label class="active" for="modal--add--title">Title</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" id="modal--add--dueDate" class="datepicker" placeholder>
+            <label for="modal--add--dueDate">Due Date</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="modal--add--description" class="materialize-textarea"></textarea>
+            <label for="modal--add--description">Description</label>
+          </div>
+          <div class="col s12">
+            <div class="input-field col s6">
+              <div id="modal--add--thumbnail--image">
+                <img src="https://picsum.photos/1920/1080" alt="No Thumbnail">
+              </div>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="modal--add--thumbnail" class="validate"></input>
+              <label for="modal--add--thumbnail">Thumbnail</label>
+              <p class="input--desc">* Type image keyword you want to attach</p>
+            </div>
+          </div>
+          <div class="input-field col s12">
+            <input id="modal--add--tag" type="text" class="validate col s6">
+            <label class="active" for="modal--add--tag">Tag</label>
+          </div>
+          <div id="modal--add--tag--list" class="tag--list">
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <a href="#!" onclick="addOneTodo()" class="modal-close waves-effect waves-green btn-flat">Save</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+  <div id="modal--delete-permission" class="modal todo--delete">
+    <div class="modal-content">
+      <div class="title">
+        <h2>Are you sure want to delete this?</h2>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" onclick="deleteOneTodo()" class="modal-close waves-effect waves-green btn-flat">Delete</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>
