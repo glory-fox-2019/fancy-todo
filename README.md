@@ -13,9 +13,9 @@
 
 | Route  | HTTP   | Headers   | Body  | Description  |
 |---|---|---|---|---|
-| /todos/  | GET  | token , payload   | none  | List Of Todos   |
-| /todos/:id  | GET  | token , payload   | none  | Detail of Todo   |
-|  /todos | POST  | token , payload   | title:string(Required) , description:string(Required) |  Create new Todo |
-|  /todos | DELETE  | token , payload   |  none   | delete a todo  |
-|  /todos/:id | PUT  |  token , payload  |  title:string(Required) , description:string(Required) |  update a todo |
-|  /todos/:id | PATCH  |  token , payload  | title:string(Required) , description:string(Required)  | update a todo  |
+| /todo/  | GET  | token , payload   | none  | List Of Todos   |
+|  /todo | POST  | token , payload   | name:string , description:string, due_date:date |  Create new Todo |
+|  /todo/:id | DELETE  | token , payload   |  none   | delete a todo  |
+|  /todo/:id/complete | PATCH  |  token , payload  |  title:string(Required) , description:string(Required) |  complete a todo |
+|  /todo/:id/uncomplete | PATCH  |  token , payload  |  title:string(Required) , description:string(Required) |  uncomplete a todo |
+|  /todo/:id | PUT  |  token , payload  | title:string(Required) , description:string(Required)  | update a todo  |
