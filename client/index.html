@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id"
+    content="819886867917-guivu8td835oh8ab5tmee0vens85lb7e.apps.googleusercontent.com">
+  <script src="https://kit.fontawesome.com/2add1d0c68.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Beth+Ellen|Roboto|Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Beth+Ellen|Roboto&display=swap" rel="stylesheet">
+  <link href="styling/style.css" rel="stylesheet" type="text/css">
+  <title> fancy-todo </title>
+</head>
+
+<body>
+
+  <!-- Login Form -->
+  <div id="login-form">
+    <div class="container-fluid">
+      <div class="modal-dialog text-center">
+        <div class="col-sm-9 main-section-login-form">
+          <div class="modal-content">
+            <div class="col-12 user-img">
+              <img src="styling/face.png" alt="">
+            </div>
+
+            <h5>fancy todo</h5>
+
+            <div class="col-12 form-input ">
+              <form action="">
+                <div class="form-group">
+                  <input type="email" id="userEmail" class="form-control" placeholder="Enter Email" required autofocus>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" id="userPassword" class="form-control" placeholder="Enter password" required
+                    autofocus>
+                </div>
+
+                <div class="register d-flex justify-content-start">
+                  <small style="font-weight: bold"> Not a member? </small> <small><a href="" onclick="showRegister()">
+                      &nbsp;
+                      Register </a></small>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-secondary btn-sm">Login
+                  </button>
+                </div>
+                <div> <small style="color: black">or login with </small></div>
+                <div style="padding: 10px 10px;" class="d-flex justify-content-center">
+                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- End Login Form -->
+
+
+
+  <!-- Register -->
+  <div id="register-form">
+    <div class="container-fluid">
+      <div class="modal-dialog text-center">
+        <div class="col-sm-9 main-section-login-form">
+          <div class="modal-content">
+
+            <div class="col-12 user-img">
+              <img style="opacity: .8;" src="http://www.luwisomo.org/wp-content/uploads/2016/07/register-icon-blue1.png"
+                alt="">
+            </div>
+
+            <div class="col-12 form-input">
+              <form action="" id="register-form">
+                <div class="form-group">
+                  <input type="text" id="username-register" class="form-control" placeholder="Enter Username" required
+                    autofocus autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <input type="email" id="email-register" class="form-control" placeholder="Enter email"
+                    autocomplete="off" required autofocus>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" id="password-register" class="form-control" placeholder="Enter password"
+                    required autofocus autocomplete="off">
+                </div>
+
+                <div class="register d-flex justify-content-start">
+                  <small style="font-weight: bold"> Already have account? </small> <small><a href=""
+                      onclick="showLogin()">
+                      &nbsp;
+                      Login </a></small>
+                </div>
+
+                <div>
+                  <button type="submit" onclick="register()" class="btn btn-secondary btn-sm">Register</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- End Register -->
+
+
+
+  <!-- Main Dashboard -->
+  <div id="dashboard">
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="color: black">fancy todo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-lg-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="showDashboard()"> dashboard </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showTodos()"> todos </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> project </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="logout()"> sign out </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="container row" style="padding-top: 60px; padding-left: 120px">
+        <div class="d-flex col-5">
+          <div class="card border-light" style="width: 20rem; background-color: #292D46; border: 0px; opacity: .7;">
+            <div class="card-body" id="dashboard-client">
+              <img class="card-img-top image"
+                src="https://cdn3.iconfinder.com/data/icons/project-management-49/50/41-512.png" alt="Card image cap">
+
+              <ul class="list-group list-group-flush">
+                <h5>get some todo list</h5>
+                <li class="list-group-item d-flex justify-content-center"
+                  style="padding-top:30px;background-color: #292D46"> <a href="#" onclick="showTodos()">
+                    <button type="button" class="btn btn-outline-dark" data-toggle="button" aria-pressed="false"
+                      autocomplete="off" style="background-color: black">
+                      SHOW TODO
+                    </button> </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <div style="font-weight: bold">
+            <p> The following is a list of holidays</p>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Holiday Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody id="list-holiday">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- End Dashboard -->
+
+  <!-- Todos -->
+
+  <div id="todos">
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="color: black">fancy todo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-lg-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showDashboard()"> dashboard </a>
+              </li>
+              <li class="nav-item  active">
+                <a class="nav-link" href="#" onclick="showTodos()"> TODOS </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> project </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="logout()"> sign out </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="container" style="padding: 10px auto">
+        <div id="todo-list">
+          <div style="padding: 10px auto">
+            <h3> YOUR TODO LIST </h3>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Completed </th>
+                <th scope="col">Options </th>
+              </tr>
+            </thead>
+            <tbody id="todo-list-table">
+
+            </tbody>
+          </table>
+        </div>
+        <div id="add-todo" class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-todo">
+            Add Todo
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL CREATE TODO -->
+  <div class="modal fade" id="create-todo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="create-todo">create todo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="create-todo-form">
+            <div class="form-group">
+              <input type="text" name="name" id="todo-name-create" class="form-control" placeholder="Enter Todo name"
+                required autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="description" id="todo-description-create" class="form-control"
+                placeholder="Enter Description" required autofocus>
+            </div>
+            <div class="form-group">
+              <input type="date" name="name" id="todo-duedate-create" class="form-control" placeholder="Enter date"
+                required autofocus>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Create Todo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL CREATE TODO -->
+
+
+  <!-- MODAL EDIT TODO -->
+
+  <div class="modal fade" id="edit-todo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="create-todo">edit todo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-todo-form">
+            <div class="form-group">
+              <input type="text" name="name" id="todo-name-edit" class="form-control" value="Enter Todo name" required
+                autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="description" id="todo-description-edit" class="form-control"
+                placeholder="Enter Description" required autofocus>
+            </div>
+            <div class="form-group">
+              <input type="date" name="name" id="todo-duedate-edit" class="form-control datepicker"
+                placeholder="Enter date" required autofocus>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Edit Todo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END MODAL EDIT TODO -->
+
+  <div id="spinner">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Todos -->
+
+  <!-- script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="script/script.js"></script>
+</body>
+
+</html>

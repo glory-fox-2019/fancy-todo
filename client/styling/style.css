@@ -1,0 +1,116 @@
+body {
+	background: url(./bg-2-form.jpg) no-repeat center fixed;
+	background-size: cover;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+#main {
+	position: relative;
+	background: url(./bg-main.png);
+	min-height: 100vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.navbar {
+	padding: 20px 0;
+}
+
+.disabled {
+	font-weight: 800;
+	font-size: 1.5em;
+	color: #262626;
+	font-family: 'Beth Ellen', cursive;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item.active .nav-link:hover {
+	background: #262626;
+	color: white
+}  
+
+.nav-item {
+	font-weight: 800;
+	text-transform: uppercase
+}
+
+.main-section-login-form {
+	margin: 0 auto;
+	margin-top: 130px;
+	padding: 0;
+}
+
+.modal-content {
+	background-color: #292D46;
+	opacity: 0.7;
+	padding: 0 18px;
+	border-radius: 15px;
+}
+
+.user-img img {
+	height: 120px;
+	width: 120px;
+}
+
+.user-img {
+	margin-top: -60px;
+	margin-bottom: 20px;
+}
+
+h5 {
+	font-weight: 800;
+	font-size: 1.2em;
+	color: black;
+	font-family: 'Beth Ellen', cursive;
+	padding-bottom: 10px
+}
+
+.form-group {
+	margin-bottom: 5px;
+}
+
+.form-group input {
+	height: 42px;
+	border-radius: 15px;
+	border: 0;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+.btn-sm {
+	font-size: 14px;
+	border-radius: 5px;
+	margin: 5px 0 10px;
+	border: 1px solid #daf1ff;
+	width: 30%;
+}
+
+.register {
+	padding: 5px 0 10px;
+}
+
+.register a {
+	color: black;
+}
+
+.google-signin {
+	padding: 5px 0 25px;
+	border-radius: 15px;
+}
+
+i {
+	color: black
+}
+
+#spinner {
+	position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
