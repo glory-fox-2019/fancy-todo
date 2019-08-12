@@ -874,6 +874,11 @@ function inviteMember() {
                     </tr>
                     `
                 )
+                Swal.fire({
+                    type: 'success',
+                    title: 'Success!',
+                    text: 'New member invited to your project!'
+                })
             })
             .fail(err => {
                 console.log(err)
