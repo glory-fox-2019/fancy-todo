@@ -240,7 +240,7 @@ function signOut() {
 
 function registerOn() {
     localStorage.setItem('register', 'true');
-    hasToken();
+    noToken();
 }
 
 function addNewTask() {
@@ -257,7 +257,7 @@ function backToTaskList() {
     localStorage.removeItem('taskId');
     localStorage.removeItem('editTask');
     localStorage.removeItem('addNewTask');
-    hasToken();
+    loginStatus();
 }
 
 function deleteTask(taskId) {
