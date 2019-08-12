@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- To specify the client Id with google sign-in -->
+    <meta name="google-signin-client_id"
+        content="859258554488-rqqovan7i68ae9tguek0ti9rddjer7g6.apps.googleusercontent.com">
+
+    <!-- To ensur propere rendering and touch zooming for all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+    <link rel="icon" href="./resources/images/icon.png">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <title>Fancy Todo</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="./resources/images/background-img.jpg" id="bg-main" alt="this should be an image">
+        </div>
+    </header>
+
+    <!-- Login User -->
+    <section>
+        <button class="nav-link active" id="logout" onclick="signOut()">logout</button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div class="login-form">
+            <form method="post">
+                <h2 class="text-center">Log in</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" required="required"
+                        id="username-login">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="required"
+                        id="password-login">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" onclick="login()">Login</button>
+                </div>
+                <div class="clearfix">
+                    <br>
+                    <div class="dropdown-divider"></div>
+                    <br>
+                    <center style="margin-top: -30px">OR</center>
+                    <br>
+                </div>
+            </form>
+            <p class="text-center"><a href="#" onclick="showRegister()">Create an Account</a></p>
+        </div>
+    </section>
+
+    <!-- Register User -->
+    <section>
+        <div class="register-form">
+            <form method="post">
+                <h2 class="text-center">Register</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" required="required"
+                        id="username-register">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="required"
+                        id="password-register">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" onclick="register()">Register</button>
+                </div>
+                <div class="clearfix">
+                    <br><br><br>
+                </div>
+            </form>
+            <p class="text-center-back" style="text-align: center"><a href="#" onclick="back()">Back</a></p>
+        </div>
+    </section>
+
+    <!-- Form To Do -->
+    <section id="form-todo">
+        <div class="row" id="todo-page">
+            <div class="col-12">
+                <div class="col-12">
+                    <h2 id="random-quote" class="mt-4" style="text-align: center; color: black;"></h2>
+                    <h3 id="random-quote-author" class="mt-4" style="text-align: center; color: rgb(92, 92, 92);"></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Form Add Todo -->
+    <section>
+        <div class="container col-3">
+            <div class="jumbotron">
+                <form id="form-add-todo" method="post">
+                    <div class="form-group">
+                        <label for="add-todo-name">Task Name</label>
+                        <input type="text" class="form-control" id="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add-todo-description">Description</label>
+                        <input type="text" class="form-control" id="description" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add-todo-due-date">Due Date</label>
+                        <input type="date" class="form-control" id="due">
+                    </div>
+                    <button type="submit" class="btn btn-dark" onclick="createTodo()">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container col-9">
+            <div class="jumbotron">
+                <div class="row">
+                    <table class="table" border="1">
+                        <thead class="thead-dark">
+                            <tr align="center">
+                                <th>What I have To Do</th>
+                                <th>Description the Task</th>
+                                <th>Do It Before/th>
+                                <th>Status</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-todos"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./resources/script/main.js"></script>
+    <script src="./resources/script/todo.js"></script>
+</body>
+
+</html>

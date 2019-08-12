@@ -1,0 +1,93 @@
+#bg-main {
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: 0;
+    position: absolute;
+}
+
+/* Login-User */
+
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -170px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+}
+.text-center{
+    margin-top: -140px;
+}
+
+/* Create-User */
+
+.register-form {
+    width: 340px;
+    margin: 50px auto;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -170px;
+}
+.register-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.register-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.text-center-back{
+    margin-top: -130px;
+}
+
+/* Google-Login */
+
+.g-signin2{
+    position: absolute;
+    left: 50%;
+    margin-left: -60px;
+    margin-top: 355px;
+    z-index: 2;
+}
+
+#logout{
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    margin-top: 10px;
+    margin-left: -40px;
+    border-radius: 1em;
+    background-color: aquamarine;
+}
+
+/* To-Do-List */
+
+.container{
+ margin-top: 50px;
+}
