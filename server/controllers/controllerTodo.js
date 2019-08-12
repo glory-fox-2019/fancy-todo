@@ -12,7 +12,7 @@ class ControllerTodos{
             user : req.decoded._id
         })
         .then(data=>{
-            res.json(data)
+            res.status(201).json(data)
         })
         .catch(err=>{
             next(err)

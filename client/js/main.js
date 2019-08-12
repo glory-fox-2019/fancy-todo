@@ -1,3 +1,4 @@
+
 if(localStorage.getItem('token')){
     $("#landingPage").hide()
     $("#dashboard").show()
@@ -5,6 +6,7 @@ if(localStorage.getItem('token')){
     $("#viewall").empty()
     $("#createForm").hide()
     $('#editform').empty()
+    $('#viewholiday').empty()
 
 }else{
     $("#landingPage").show()
@@ -13,6 +15,27 @@ if(localStorage.getItem('token')){
     $("#logout").hide()
     $("#dashboard").hide()
 }
+
+$(document).ready(()=>{
+    $('#home').click(function(){
+        if(localStorage.getItem('token')){
+            $("#landingPage").hide()
+            $("#dashboard").show()
+            $("#logout").show()
+            $("#viewall").empty()
+            $("#createForm").hide()
+            $('#editform').empty()
+    
+        }else{
+            $("#landingPage").show()
+            $("#formRegister").hide()
+            $("#formLogin").show()
+            $("#logout").hide()
+            $("#dashboard").hide()
+    }
+
+    })
+})
 
 
 function loginUser(){
@@ -29,6 +52,7 @@ function loginUser(){
         console.log('user logged in');
         localStorage.setItem('token',token)
         $("#viewall").empty()
+        $('#viewholiday').empty()
         $('#editform').empty()
         $("#createForm").hide()
         $("#landingPage").hide()
@@ -92,6 +116,7 @@ function onSignIn(googleUser) {
         $("#logout").show()
         $("#dashboard").show()
         $("#viewall").empty()
+        $('#viewholiday').empty()
         $('#editform').empty()
         $("#createForm").hide()
 
@@ -119,6 +144,7 @@ function signOut(){
 function findAll(){
     $("#createForm").hide()
     $('#editform').empty()
+    $('#viewholiday').empty()
     $('#viewall').empty()
     $('#viewall').show()
     $.ajax({
@@ -190,6 +216,7 @@ function findAll(){
 function create(){
     $('#viewall').hide()
     $('#editform').empty()
+    $('#viewholiday').empty()
     $('#createForm').show()
 }
 

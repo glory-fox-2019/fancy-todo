@@ -1,6 +1,7 @@
 function editdata(id){
     $('#editform').empty()
     $('#viewall').empty()
+    $('#viewholiday').empty()
     $.ajax({
         method : 'GET',
         url : `http://localhost:3000/api/todos/${id}`,
@@ -12,10 +13,10 @@ function editdata(id){
         console.log(data);
         let date = new Date(data.due)
         let month
-        if(date.getMonth()<10) {
-            month = '0'+date.getMonth()
+        if(date.getMonth()+1<10) {
+            month = '0'+(date.getMonth()+1)
         } else {
-            month = date.getMonth()
+            month = date.getMonth()+1
         }
         date = `${date.getFullYear()}-${month}-${date.getDate()}`
         $('#editform').prepend(
