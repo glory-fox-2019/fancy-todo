@@ -3,7 +3,7 @@ const Router = express.Router();
 const projectController = require('../controllers/projectCon')
 const { Authentication, Authorization } = require('../middlewares/auth')
 
-Router.patch('/member/:id/:userId', projectController.addMember)
+Router.get('/member/:id/:userId', projectController.addMember)
 
 Router.use(Authentication)
 Router.post('/', projectController.create)

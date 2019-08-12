@@ -98,11 +98,12 @@ class ProjectController {
                     {new:true}
                 )
                 .then( updated => {
-                    res.status(200).json(updated)
+                    res.redirect('http://localhost:8080/')
                 })                 
             }
         }) 
         .then(data =>{
+            
             console.log('Success add user to project')
         })
         .catch(next)
@@ -161,8 +162,8 @@ class ProjectController {
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                            user: `fancy.todo7@gmail.com`,
-                            pass: `hacktiv8`
+                            user: `geminio.curse7@gmail.com`,
+                            pass: `songlongVN21`
                         }
                     })
 
@@ -171,22 +172,7 @@ class ProjectController {
                     <hr>
                     ${invitingUser.name} wants you to join ${data.name}, 
                     to accept the invitation please click link below :
-                    <a id="accept" href="http://localhost:8080"> Click Here </a>
-                    <script>
-                    $('#accept').click(function (event) {
-                        event.preventDefault()
-                        return $.ajax({
-                            url: 'http://localhost:3000/projects/member/${req.params.id}/${req.params.userId}'
-                            type: 'PATCH'
-                        })
-                        .done(function (data) {
-                            console.log('Success add member to project')
-                        })
-                        .fail(function (err) {
-                            res.status(10).json(err)
-                        })
-                    }
-                    </script>
+                    <a id="accept" href="http://localhost:3000/projects/member/${req.params.id}/${req.params.userId}"> Click Here </button>
                     `
 
                     let emailDestination
