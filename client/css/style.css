@@ -1,0 +1,11 @@
+body {
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    font-family: 'Raleway', sans-serif;
+  }
+
+.standout {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
