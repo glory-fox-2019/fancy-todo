@@ -55,8 +55,8 @@ function signIn(email, password) {
         $("#login").hide()
         $("#home-page").show()
         $("#username").append(`
-        <h3>Hello ${response.data.username} !</h3>
-        <h4>What are you gonna do today ?</h4>
+        <h4>Hello ${localStorage.username} !</h4>
+        <h5>What are you gonna do today ?</h5>
         `)
         loadTodo()
     })
@@ -403,6 +403,16 @@ $(document).ready(function () {
         $("#signIn_password").empty()
         signIn(email, password)
     })
+    if (localStorage.token) {
+        $("#register").hide()
+        $("#login").hide()
+        $("#home-page").show()
+        $("#username").append(`
+        <h4>Hello ${localStorage.username} !</h4>
+        <h5>What are you gonna do today ?</h5>
+        `)
+        loadTodo()
+    }
 
     $("#btn-register").click(function () {
         $("#login").hide()
