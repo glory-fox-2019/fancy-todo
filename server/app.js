@@ -17,10 +17,14 @@ app.use(express.json({}));
 mongoose.connect('mongodb://localhost:27017/task_fancytodo', {useNewUrlParser: true});
 // mongoose.connect('mongodb://localhost:27017/task_hacktivgit', {useNewUrlParser: true});
 
-app.use('/api/todos', routes.todo);
 app.use('/api/user', routes.user);
 
+app.use(authentication)
+app.use('/api/todos', routes.todo);
+app.use('/api/photos', routes.photo);
+
 app.use(function(err,req,res,next){
+  console.log(err);
   res.status(err.httpStatus || 500)
     .json({error: err.message});
 });

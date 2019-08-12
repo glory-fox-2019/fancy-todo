@@ -82,12 +82,17 @@ body > div > .title {
 #todo .todo--list .todo__item .todo__item--dueDate {
   border-radius: 20px;
   padding: 5px 10px;
+  background-color: #ffc107;
 }
 
 #todo .todo--list .todo__item .todo__item--dueDate .date {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+#todo .todo--list .todo__item .expired {
+  background: #F44336;
 }
 
 #todo .todo--list .todo__item .todo__item--thumbnail {
@@ -110,7 +115,6 @@ body > div > .title {
   display: inline-block;
   bottom: 10px;
   left: 10px;
-  background-color: #ffc107;
 }
 
 #todo .todo--list .todo__item .todo__item--bottom {
@@ -134,7 +138,6 @@ body > div > .title {
   margin-left: 10px;
   margin-bottom: 10px;
   float: left;
-  background-color: #ffc107;
 }
 
 .modal .input--desc {

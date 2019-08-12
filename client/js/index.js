@@ -1,4 +1,6 @@
 let baseurl = 'http://localhost:3100/api';
+let compareDate = new Date();
+compareDate.setDate( compareDate.getDate() - 1 );
 $(document).ready(function(){
   initialLoad();
   $('#modal--more--tag').keypress(function(e){
@@ -15,12 +17,46 @@ $(document).ready(function(){
       $(this).val('');
     }
   })
-  $('#form--search').submit(function(el){
-    $.ajax({
-      url: `${}`
-    })
+  $('#input--search').keyup(function(){
+    let keyword = encodeURI($(this).val());
+    loadTodos(keyword);
   });
+  $('.modal--thumbnail').keyup(function(){
+    let el = this;
+    let keyword = encodeURI($(el).val())
+    let keycode = (event.keyCode ? event.keyCode : event.which);
+    let elementId = $(el).attr('id');
+    if(keycode == '13'){
+      if(keyword){
+        $(el).closest('.col').find('.alert--container').html('');
+        $.ajax({
+          url: `${baseurl}/photos?search=`+keyword,
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+        .done((data) => {
+          $('#'+elementId+'--image img').attr('src',data.small)
+        })
+        .fail((err) => {
+          $('#'+elementId+'--image img').attr('src','')
+          $(el).closest('.col').find('.alert--container').html(alertElement('Not Found'));
+          console.error(err);
+        })
+      }else{
+        $('#'+elementId+'--image img').attr('src','')
+      }
+    }
+  })
 });
+function alertElement(text){
+  let alert = `
+          <div class="chip red">
+            ${text}
+            <i class="close material-icons">close</i>
+          </div>`;
+  return alert;
+}
 
 function initialLoad(){
   if(isLogin()){
@@ -49,16 +85,15 @@ function getUserData(){
     }
   })
   .done(function(data){
-    console.log(data);
     $('.navbar--username').text(data.username);
   })
   .fail((error, errorName) => {
     console.error(error,errorName)
   });
 }
-function loadTodos(){
+function loadTodos(keyword){
   $.ajax({
-    url: `${baseurl}/todos/`,
+    url: `${baseurl}/todos${keyword ? '?search='+keyword : ''}`,
     headers: {
       token: localStorage.getItem('token')
     }
@@ -66,47 +101,44 @@ function loadTodos(){
   .done((data) => {
     $('.todo--list .row').html('');
     data.forEach((el)=>{
-      loadIndividualTodo(el);
+      loadIndividualTodo(el,'.todo--list .row','full');
     });
   })
   .fail((error,errorName) => {
     console.log(errorName,error);
   })
 }
-function loadIndividualTodo(el){
+function loadIndividualTodo(data,elTo,type){
   let html;
-  if(el.thumbnail){
+  if(data.thumbnail){
     html = `
-    <div class="todo__item col s4" data-id="${el._id}">
       <div class="card">
-        <div class="todo__item--thumbnail" style="background-image: url('${el.thumbnail}');">
+        <div class="todo__item--thumbnail" style="background-image: url('${data.thumbnail}');">
           <div class="todo__item--action">
             <a href="#modal--more" class="btn-floating waves-effect waves-yellow btn btn-flat white btn--more-todo modal-trigger" onclick="loadOneTodo(this)"><i class="material-icons">more</i></a>
             <a href="#modal--delete-permission" class="btn-floating waves-effect waves-red btn btn-flat white btn--delete-todo modal-trigger" onclick="loadDeleteOneTodo(this)"><i class="material-icons">delete</i></a>
           </div>
-          <div class="todo__item--dueDate" ${!el.dueDate && 'style="display:none"' }>
+          <div class="todo__item--dueDate ${new Date(data.dueDate) < compareDate? 'expired' : ''}" ${!data.dueDate || data.status ? 'style="display:none"' : 'style="display:block"'}>
             <div class="date">
-              <i class="material-icons">date_range</i><span>${moment(el.dueDate).calendar()}</span>
+              <i class="material-icons">date_range</i><span>${(moment(data.dueDate).calendar().split(" at"))[0]}</span>
             </div>
           </div>
         </div>
         <div class="todo__item--bottom">
           <label class="todo__item--checkbox">
-            <input type="checkbox" onchange="checkboxChange(this)" ${ (el.status) ? 'checked' : ''}/>
-            <span>${el.title}</span>
+            <input type="checkbox" onchange="checkboxChange(this)" ${ (data.status) ? 'checked' : ''}/>
+            <span>${data.title}</span>
           </label>
         </div>
       </div>
-    </div>
     `
   }else{
     html = `
-    <div class="todo__item col s4" data-id="${el._id}">
       <div class="card">
         <div class="todo__item--bottom">
           <label class="todo__item--checkbox">
-            <input type="checkbox" onchange="checkboxChange(this)" ${ (el.status) ? 'checked' : ''}/>
-            <span>${el.title}</span>
+            <input type="checkbox" onchange="checkboxChange(this)" ${ (data.status) ? 'checked' : ''}/>
+            <span>${data.title}</span>
           </label>
         </div>
         <div class="todo__item--essential">
@@ -114,16 +146,20 @@ function loadIndividualTodo(el){
             <a href="#modal--more" class="btn-floating waves-effect waves-yellow btn btn-flat white btn--more-todo modal-trigger" onclick="loadOneTodo(this)"><i class="material-icons">more</i></a>
             <a href="#modal--delete-permission" class="btn-floating waves-effect waves-red btn btn-flat white btn--delete-todo modal-trigger" onclick="loadDeleteOneTodo(this)"><i class="material-icons">delete</i></a>
           </div>
-          <div class="todo__item--dueDate"  ${!el.dueDate && 'style="display:none"' }>
+          <div class="todo__item--dueDate ${new Date(data.dueDate) < compareDate? 'expired' : ''}" ${!data.dueDate || data.status ? 'style="display:none"' : 'style="display:block"'}>
             <div class="date">
-              <i class="material-icons">date_range</i><span>${moment(el.dueDate).calendar()}</span>
+              <i class="material-icons">date_range</i><span>${(moment(data.dueDate).calendar().split(" at"))[0]}</span>
             </div>
           </div>
         </div>
-      </div>
-    </div>`
+      </div>`
   }
-  $('.todo--list .row').prepend(html)
+  if(type === 'full'){
+    html = `<div class="todo__item col s4" data-id="${data._id}"> ${html} </div>`
+    $(elTo).prepend(html)
+  }else{
+    $(elTo).html(html)
+  }
 }
 function loadDeleteOneTodo(element){
   let id = $(element).closest('.todo__item').attr('data-id');
@@ -131,7 +167,12 @@ function loadDeleteOneTodo(element){
 }
 function loadOneTodo(element){
   let id = $(element).closest('.todo__item').attr('data-id');
-  console.log(id);
+  $('#modal--more--title').val('');
+  $('#modal--more--dueDate').val(''),
+  $('#modal--more--description').val(''),
+  $('#modal--more--thumbnail--image img').attr('src','');
+  $('#modal--more--tag').val('');
+  $('#modal--more--tag--list').html('');
   $.ajax({
     url: `${baseurl}/todos/${id}`,
     headers: {
@@ -142,7 +183,13 @@ function loadOneTodo(element){
     console.log(data);
     $('#modal--more--id').val(data._id);
     $('#modal--more--title').val(data.title);
-    $('#modal--more--dueDate').datepicker({setDefaultDate: true,defaultDate:new Date(data.dueDate), minDate: new Date()});
+    if(data.dueDate){
+      $('#modal--more--dueDate').datepicker({setDefaultDate: true,defaultDate:new Date(data.dueDate), minDate: new Date()});
+    }else{
+      $('#modal--more--dueDate').datepicker({
+        minDate: new Date() 
+      })
+    }
     $('#modal--more--description').val(data.description);
     // Thumbnail
     $('#modal--more--thumbnail--image img').attr('src',data.thumbnail);
@@ -175,12 +222,13 @@ function updateOneTodo(){
     title: $('#modal--more--title').val(),
     dueDate: $('#modal--more--dueDate').val(),
     description: $('#modal--more--description').val(),
-    thumbnail: $('#modal--more--thumbnail--image img').attr('src'),
     tag: tags,
+    thumbnail: $('#modal--more--thumbnail--image img').attr('src'),
   }
+  console.log(data);
   $.ajax({
     url: `${baseurl}/todos/${id}`,
-    method: 'PATCH',
+    method: 'PUT',
     data,
     headers: {
       token: localStorage.getItem('token')
@@ -188,52 +236,7 @@ function updateOneTodo(){
   })
   .done((data) => {
     let element = $(`.todo__item[data-id=${id}]`);
-    let html;
-    if(data.thumbnail){
-      html = `
-        <div class="card">
-          <div class="todo__item--thumbnail" style="background-image: url('${data.thumbnail}');">
-            <div class="todo__item--action">
-              <a href="#modal--more" class="btn-floating waves-effect waves-yellow btn btn-flat white btn--more-todo modal-trigger" onclick="loadOneTodo(this)"><i class="material-icons">more</i></a>
-              <a href="#modal--delete-permission" class="btn-floating waves-effect waves-red btn btn-flat white btn--delete-todo modal-trigger" onclick="loadDeleteOneTodo(this)"><i class="material-icons">delete</i></a>
-            </div>
-            <div class="todo__item--dueDate" ${!data.dueDate && 'style="display:none"' }>
-              <div class="date">
-                <i class="material-icons">date_range</i><span>${moment(data.dueDate).calendar()}</span>
-              </div>
-            </div>
-          </div>
-          <div class="todo__item--bottom">
-            <label class="todo__item--checkbox">
-              <input type="checkbox" onchange="checkboxChange(this)" ${ (data.status) ? 'checked' : ''}/>
-              <span>${data.title}</span>
-            </label>
-          </div>
-        </div>
-      `
-    }else{
-      html = `
-        <div class="card">
-          <div class="todo__item--bottom">
-            <label class="todo__item--checkbox">
-              <input type="checkbox" onchange="checkboxChange(this)" ${ (data.status) ? 'checked' : ''}/>
-              <span>${data.title}</span>
-            </label>
-          </div>
-          <div class="todo__item--essential">
-            <div class="todo__item--action">
-              <a href="#modal--more" class="btn-floating waves-effect waves-yellow btn btn-flat white btn--more-todo modal-trigger" onclick="loadOneTodo(this)"><i class="material-icons">more</i></a>
-              <a href="#modal--delete-permission" class="btn-floating waves-effect waves-red btn btn-flat white btn--delete-todo modal-trigger" onclick="loadDeleteOneTodo(this)"><i class="material-icons">delete</i></a>
-            </div>
-            <div class="todo__item--dueDate" ${!data.dueDate && 'style="display:none"' }>
-              <div class="date">
-                <i class="material-icons">date_range</i><span>${moment(data.dueDate).calendar()}</span>
-              </div>
-            </div>
-          </div>
-        </div>`
-    }
-    $(element).html(html);
+    loadIndividualTodo(data,element,'inner');
   })
   .fail((error,errorName) => {
     console.error(errorName,error);
@@ -261,6 +264,9 @@ function loadAddTodo(){
   $('#modal--add--title').val('');
   $('#modal--add--dueDate').val(''),
   $('#modal--add--description').val(''),
+  $('#modal--add--dueDate').datepicker({
+    minDate: new Date() 
+  })
   $('#modal--add--thumbnail--image img').attr('src','');
   $('#modal--add--tag').val('');
   $('#modal--add--tag--list').html('');
@@ -286,7 +292,8 @@ function addOneTodo(){
     }
   })
   .done(function(data){
-    loadIndividualTodo(data);
+    console.log(data);
+    loadIndividualTodo(data, '.todo--list .row', 'full');
   })
   .fail(function(error, errorName){
     console.error(errorName,error)
@@ -319,8 +326,12 @@ function checked(el){
       token: localStorage.getItem('token')
     }
   })
-  .done(function(el){
-    
+  .done(function(){
+    let dueDateElement = $(el).closest('.card').find('.todo__item--dueDate');
+    if(!$(dueDateElement).hasClass('expired')){
+      console.log(dueDateElement)
+      $(dueDateElement).hide();    
+    }
   })
   .fail(function(error,errorName){
     console.error(errorName, error);
@@ -334,8 +345,11 @@ function unchecked(el){
       token: localStorage.getItem('token')
     }
   })
-  .done(function(el){
-    
+  .done(function(){
+    let dueDateElement = $(el).closest('.card').find('.todo__item--dueDate');    
+    if(!$(dueDateElement).hasClass('expired')){
+      $(dueDateElement).show();
+    }
   })
   .fail(function(error,errorName){
     console.error(errorName, error);

@@ -1,17 +1,26 @@
+let date = new Date();
+date.setDate( date.getDate() - 1 )
+
 const mongoose = require('mongoose');
 const todoSchema = new mongoose.Schema({
   title: {
-    type:'string',
+    type:String,
     required: true,
   },
-  description: 'string',
-  thumbnail: 'string',
-  tag: 'array',
+  description: String,
+  thumbnail: String,
+  tag: Array,
   status: {
-    type:'boolean',
+    type:Boolean,
     required: true,
   },
-  dueDate: 'date',
+  dueDate: {
+    type:Date,
+    min: date,
+  },
+},{
+  versionKey: false,
+  timestamps: true
 });
 
 const Todo = mongoose.model('Todos',todoSchema);

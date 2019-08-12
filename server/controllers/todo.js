@@ -2,22 +2,37 @@ const Model = require('../models');
 
 class Todo {
   static findAll(req,res,next){
-    Model.Todo
-      .find()
-      .then((data) => {
-        res.status(201).json(data);
+    let whereData = {}
+    if(req.query.search){
+      whereData.title = { $regex: new RegExp(req.query.search.toLowerCase(), "i")
+    };}
+    Model.User
+      .findOne({
+        username: req.decode.username
+      })
+      .populate({
+        path: 'todos',
+        match: whereData
+      })
+      .then(({todos}) => {
+        res.status(200).json(todos);
       })
       .catch(next);
   }
   static findOne(req,res,next){
-    Model.Todo
+    Model.User
       .findOne({
-        _id: req.params.id
+        username: req.decode.username
       })
-      .then((data) => {
-        if(data){
-          res.status(201).json(data);
-        }else{
+      .populate({
+        path: 'todos',
+        match: {
+          _id: req.params.id
+        }
+      })
+      .then(({todos}) => {
+        if(todos) res.json(todos[0]); 
+        else{
           next({
             httpStatus: 404,
             message: 'Not Found!'
@@ -27,6 +42,7 @@ class Todo {
       .catch(next);
   }
   static create(req,res,next){
+    let todoData;
     Model.Todo
       .create({
         title: req.body.title,
@@ -37,50 +53,104 @@ class Todo {
         status: false
       })
       .then((data) => {
-        res.status(201).json(data);
+        todoData = data;
+        return Model.User
+          .findOneAndUpdate({
+            username: req.decode.username
+          },{
+            $push: {todos: data._id}
+          })
+      })
+      .then((data) => {
+        res.status(201).json(todoData);
       })
       .catch(next)
   }
   static edit(req,res,next){
-    let input = {};
+    console.log(req.body)
+    let input = {"$set": {}};
     req.body.title && (input.title = req.body.title)
     req.body.dueDate && (input.dueDate = req.body.dueDate)
     req.body.description && (input.description = req.body.description)
-    req.body.tag && (input.tag = req.body.tag)
-    req.body.thumbnail && (input.thumbnail = req.body.thumbnail)
+    req.body['tag[]'] && (input.tag = req.body['tag[]'])
+    input.thumbnail = req.body.thumbnail
 
-    Model.Todo
-      .findByIdAndUpdate(req.params.id, input, {new: true})
+    Model.User
+      .findOne({
+        username: req.decode.username,
+      })
+      .populate({
+        path: 'todos',
+        match: {
+          _id:req.params.id
+        }
+      })
       .then((data) => {
+        if(data){
+          return Model.Todo
+            .findOneAndUpdate({
+              _id:req.params.id
+            },input, { new: true})
+        }else{
+          next({httpStatus:404,message:'Todo is not found'})
+        }
+      })
+      .then((data) => {
+        console.log(data);
         res.json(data);
       })
       .catch(next)
   }
   static delete(req,res,next){
-    Model.Todo
-      .deleteOne({_id: req.params.id})
-      .then((data) => {
-        if(data.deletedCount === 0){
-          next({
-            httpStatus: 404,
-            message: 'Not Found!'
-          })
-        }else{
-          res.json({
-            message: 'Successfully Deleted!'
-          });
-        }
-      })
+    Model.User
+    .findOne({
+      username: req.decode.username,
+    })
+    .populate({
+      path: 'todos',
+      match: {
+        _id:req.params.id
+      }
+    })
+    .then(data => {
+      if(!data) next({httpStatus: 404, message: 'Not Found'})
+      return Model.Todo
+        .deleteOne({_id: req.params.id})
+    })
+    .then((data) => {
+      if(data.deletedCount === 0){
+        next({
+          httpStatus: 404,
+          message: 'Not Found!'
+        })
+      }else{
+        res.json({
+          message: 'Successfully Deleted!'
+        });
+      }
+    })
   }
   static check(req,res,next){
-    Model.Todo
-      .updateOne({
-        _id: req.params.id
-      },{
-        status: true
+    Model.User
+      .findOne({
+        username: req.decode.username,
+      })
+      .populate({
+        path: 'todos',
+        match: {
+          _id:req.params.id
+        }
+      })
+      .then(data => {
+        if(!data) next({httpStatus: 404, message: 'Not Found'}); 
+        return Model.Todo
+        .updateOne({
+          _id: req.params.id
+        },{
+          status: true
+        })
       })
       .then((data) => {
-        // console.log(data)
         if(data.n > 0){
           res.json({
             message: 'Successfully Updated'
@@ -94,24 +164,37 @@ class Todo {
       })
   }
   static uncheck(req,res,next){
-    Model.Todo
+    Model.User
+    .findOne({
+      username: req.decode.username,
+    })
+    .populate({
+      path: 'todos',
+      match: {
+        _id:req.params.id
+      }
+    })
+    .then(data => {
+      if(!data) next({httpStatus: 404, message: 'Not Found'}); 
+      return Model.Todo
       .updateOne({
         _id: req.params.id
       },{
         status: false
       })
-      .then((data) => {
-        if(data.n > 0){
-          res.json({
-            message: 'Successfully Updated'
-          })
-        }else{
-          next({
-            httpStatus: 404,
-            message: 'Not Found!'
-          })
-        }
-      })
+    })
+    .then((data) => {
+      if(data.n > 0){
+        res.json({
+          message: 'Successfully Updated'
+        })
+      }else{
+        next({
+          httpStatus: 404,
+          message: 'Not Found!'
+        })
+      }
+    })
   }
 }
 

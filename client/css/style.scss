@@ -70,9 +70,13 @@ body>div>.title{
       .todo__item--dueDate{
         border-radius: 20px;
         padding: 5px 10px;
+        background-color: #ffc107;
         .date{
           display: flex; 
         }
+      }
+      .expired{
+        background: #F44336;
       }
       .todo__item--thumbnail{
         background-size: cover;
@@ -91,7 +95,6 @@ body>div>.title{
           display: inline-block;
           bottom: 10px;
           left: 10px;
-          background-color: #ffc107;
         }
       }
       .todo__item--bottom{
@@ -109,7 +112,6 @@ body>div>.title{
           margin-left: 10px;
           margin-bottom: 10px;
           float: left;
-          background-color: #ffc107;
 
         }
       }

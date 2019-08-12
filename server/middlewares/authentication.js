@@ -1,4 +1,11 @@
+const jwt = require('../helpers/jwt')
 module.exports = function(req,res,next){
-  if(req.headers.isLogin) next();
-  next({httpStatus: 401, message: 'Unauthorized'})
+  try{
+    const decode = jwt.decodeToken(req.headers.token);
+    // console.log('test')
+    req.decode = decode;
+    next();
+  }catch(err){
+    next({httpStatus:403,message:`You're not authorized`})
+  }
 }

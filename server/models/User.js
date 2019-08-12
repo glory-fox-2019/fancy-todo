@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   username: {
-    type:'string',
+    type:String,
     required: true,
     isUnique: true,
   },
   password: {
-    type:'string',
+    type:String,
     required: true,
   },
   email: {
-    type:'string',
+    type:String,
     required: true,
     isUnique: true,
     validate: {
@@ -20,9 +20,13 @@ const userSchema = new mongoose.Schema({
       message: props => `${props.value} is not a valid email` 
     }
   },
-  todo: {
-    type:'array',
-  },
+  todos: [{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Todos'
+  }],
+},{
+  versionKey: false,
+  timestamps: true
 });
 
 const User = mongoose.model('Users',userSchema);
