@@ -156,7 +156,7 @@ class ProjectController {
         let invitingUser = decoded(req.headers.access_token)
         Project.findById(req.params.id)
         .then(data => {
-            if (!data) next({ message: 'Todo Not Found' })
+            if (!data) next({ message: 'Project Not Found' })
                 else {
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
@@ -176,7 +176,7 @@ class ProjectController {
                     $('#accept').click(function (event) {
                         event.preventDefault()
                         return $.ajax({
-                            url: 'http://34.87.76.86/projects/member/${req.params.id}/${req.params.userId}'
+                            url: 'http://localhost:3000/projects/member/${req.params.id}/${req.params.userId}'
                             type: 'PATCH'
                         })
                         .done(function (data) {
@@ -190,31 +190,32 @@ class ProjectController {
                     `
 
                     let emailDestination
+                    let mailOptions
 
-                    User.findById(req.params.id)
+                    User.findById(req.params.userId)
                     .then(user => {
                         if (!user) next({ message: 'Todo Not Found' })
                             else {
                                 emailDestination = user.email
+                                mailOptions = {
+                                    from: 'admin@todolist.com', // sender address
+                                    to: emailDestination, // list of receivers
+                                    subject: 'Invitational to join project', // Subject line
+                                    html: emailCont
+                                };
+                                transporter.sendMail(mailOptions, function (err, info) {
+                                    if(err){
+                                        console.log(err);
+                                    } else {
+                                        console.log(info);
+                                    }
+                                })
                             }
                     }) 
                     .catch(next)
 
-
-                    const mailOptions = {
-                        from: 'admin@todolist.com', // sender address
-                        to: emailDestination, // list of receivers
-                        subject: 'Invitational to join project', // Subject line
-                        html: emailCont
-                    };
             
-                    transporter.sendMail(mailOptions, function (err, info) {
-                        if(err){
-                            console.log(err);
-                        } else {
-                            console.log(info);
-                        }
-                    })
+                    
                 }
         }) 
         .catch(next)
