@@ -1,0 +1,17 @@
+SECRET_TOKEN=0f565ba4f2835818e7e53769eaae987fa66efc60
+GOOGLE_CLIENT_ID=769372279973-q1pabdii63p0os9803lomqvdh3s1t3dn.apps.googleusercontent.com 
+PORT=3000
+PASSWORD=sleepless
+
+# kendala proses
+
+- leptop sering 'nge-freez'
+- mongoDb error tidak mau di run
+    - sudah coba sudo service mongod start, tetap tidak bisa
+    - coba ganti path mongoDb juga sama
+    - saya coba remove tapi keterangan tidak ada file mongoDb
+- masih bingung di bagian server
+    - cara olah dan lempar datanya
+    - Oauth juga masih belum yakin bisa
+
+// aplikasi masih ada error

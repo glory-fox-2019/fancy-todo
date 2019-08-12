@@ -1,0 +1,74 @@
+* {
+    font-size: 12px;
+}
+
+img{
+    border-radius: 50%;
+}
+
+.nav-icon {
+    margin: 5px;
+}
+
+.login form{
+    transform: translate(35%)
+}
+
+.login button {
+    margin-top: 10px;
+    padding: 6px;
+    padding-right: 15px;
+    padding-left: 15px;
+    /* background-color: aqua; */
+}
+
+.login .form-group{
+    text-align: left;
+    max-width: 300px;
+}
+
+.login h3 {
+    margin-top: 110px;
+}
+
+.col-dua {
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
+
+.btn-todo .btn {
+    width: auto;
+    background: #fff;
+    /* color: black */
+}
+
+.create-todo {
+    transform: translate(30%, 5%)
+}
+
+.create-todo form{
+    margin-top: 20px;
+}
+
+.create-todo button {
+    margin-top: 10px;
+    padding: 6px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.create-todo .form-group {
+    text-align: left;
+    max-width: 400px;
+}
+
+.create-todo h3 {
+    margin-top: 110px;
+    
+}
+
+.col-tiga img{
+    max-width: 60px;
+    max-height: 60px;
+    margin: 5px;
+}
