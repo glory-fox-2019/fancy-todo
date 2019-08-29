@@ -1,16 +1,18 @@
-# Todo
+# TODO
 
 ```
 Deploy Client :
-
+http://fancytodo.nurfitrys.com
 
 Deploy Server :
-
+http://34.87.100.154
 ```
+
+---
 
 ## User Route
 
-### Register New User
+### Register
 
 - Method
     - **POST**

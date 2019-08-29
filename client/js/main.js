@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/'
+const url = 'http://34.87.100.154/'
 
 $('#project-list-page').hide()
 
@@ -134,9 +134,10 @@ function login() {
     })
     .done(response => {
         localStorage.setItem('accesstoken', response.accesstoken)
-        console.log('err disinii')
         postLogin()
         resetLoginForm()
+        fetchMyTodos()
+        fetchMyProjects()
     })
     .fail((jqXHR, textstatus) => {
         swal(jqXHR.responseJSON.message)
@@ -158,6 +159,8 @@ function onSignIn(googleUser) {
         localStorage.setItem('accesstoken', response.accesstoken)
 
         postLogin()
+        fetchMyTodos()
+        fetchMyProjects()
     })
     .fail((jqXHR, textstatus) => {
         console.log(jqXHR)
