@@ -2,6 +2,8 @@
 
 Routes
 ---
+Deploy server: http://35.240.248.42:3000/<br>
+Deploy client: http://todo.mromiario.com/<br>
 Access : http://localhost:3000/api
 
 Bellows are routes that used in the sever fancy-todo.js
