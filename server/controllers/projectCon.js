@@ -92,7 +92,7 @@ class ProjectController {
             if (!data) next({ code: 404, resource: 'Project' })
             else {
                 return Project.findByIdAndUpdate(data.id,
-                    {$push:
+                    {$addToSet:
                         {members: req.params.userId}
                     },
                     {new:true}
@@ -194,6 +194,9 @@ class ProjectController {
                                         console.log(err);
                                     } else {
                                         console.log(info);
+                                        res.status(200).json({
+                                            msg: 'success'
+                                        })
                                     }
                                 })
                             }

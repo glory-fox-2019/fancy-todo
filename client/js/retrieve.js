@@ -117,9 +117,11 @@ function sendEmail(userId) {
         }
     })
     .done(data => {
+        Swal.fire('Email sent to user')
         retrieveProject()
     })
     .fail(err => {
+        Swal.fire('Oops... something went wrong')
         console.log(err)
     })
 }
