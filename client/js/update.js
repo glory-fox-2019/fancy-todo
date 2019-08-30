@@ -64,10 +64,22 @@ function updated(id){
         }
     })
         .done(function(data){
+            Swal.fire({
+                type: 'success',
+                title: 'Todo has been updated!',
+                showConfirmButton: false,
+                timer: 1500
+              })
             findAll()
             console.log(data);
         })
         .fail(function(gg, textStatus){
+            Swal.fire({
+                type: 'error',
+                title: 'Internal Server Error!',
+                showConfirmButton: false,
+                timer: 1500
+              })
             console.log('Error :',textStatus);
         })
     }

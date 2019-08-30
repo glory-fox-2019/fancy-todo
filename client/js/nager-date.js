@@ -47,6 +47,12 @@ function holiday(){
                 
                     })
                     .done(function(data){
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Holiday agenda has been added to your ToDo!',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                         findAll()
                         console.log(data);
                     })

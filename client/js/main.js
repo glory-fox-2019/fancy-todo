@@ -58,11 +58,22 @@ function loginUser(){
         $("#landingPage").hide()
         $("#dashboard").show()
         $("#logout").show()
-
+        Swal.fire({
+            type: 'success',
+            title: 'Login success!',
+            showConfirmButton: false,
+            timer: 1500
+          })
 
     })
     .fail(function(gg,textStatus){
         console.log('Error',textStatus);
+        Swal.fire({
+            type: 'error',
+            title: 'Invalid Username/Password!',
+            showConfirmButton: false,
+            timer: 1500
+          })
     })
 
 }
@@ -90,11 +101,25 @@ function createUser(){
         }
     })
     .done(function(data){
+        Swal.fire({
+            type: 'success',
+            title: 
+            `Register success! 
+            Please, login first!`,
+            showConfirmButton: false,
+            timer: 1500
+          })
         console.log('data created',data);
         showLogin()
 
     })
     .fail(function(gg,textStatus){
+        Swal.fire({
+            type: 'error',
+            title: 'Please check your data!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         console.log('Error',textStatus);
     })
 
@@ -110,6 +135,12 @@ function onSignIn(googleUser) {
         }
     })
     .done(function(data){
+        Swal.fire({
+            type: 'success',
+            title: 'Login success!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         console.log('Sign in as', data);
         localStorage.setItem('token',data)
         $("#landingPage").hide()
@@ -122,6 +153,12 @@ function onSignIn(googleUser) {
 
     })
     .fail(function(gg,textStatus){
+        Swal.fire({
+            type: 'error',
+            title: 'Invalid Username/Password!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         console.log('Error', textStatus);
     })
     
@@ -133,11 +170,18 @@ function signOut(){
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
+    Swal.fire({
+        type: 'success',
+        title: 'Logout success!',
+        showConfirmButton: false,
+        timer: 1500
+      })
     $("#landingPage").show()
     $("#formRegister").hide()
     $("#formLogin").show()
     $("#dashboard").hide()
     $("#logout").hide()
+    $("#viewall").empty()
 }
 
 

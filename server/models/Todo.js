@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const Todo = new Schema({
-    name : String,
-    description : String,
-    status : Boolean,
+    name : {type: String, required:true},
+    description :{type: String, require:true },
+    status :{type:Boolean},
     due : Date,
     user : {
         type : ObjectId,

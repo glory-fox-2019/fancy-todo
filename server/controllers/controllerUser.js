@@ -61,8 +61,8 @@ class controllerUser{
             .then(user=>{
                 if(user){
                     console.log('data ada di db')
-                    const {name,email,birthday_date} = user
-                    return {name,email,birthday_date}
+                    const {_id,name,email,birthday_date} = user
+                    return {_id,name,email,birthday_date}
                 }else{
                     console.log('membuat data')
                     const {name,email} = payload
