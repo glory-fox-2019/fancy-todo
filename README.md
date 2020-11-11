@@ -6,10 +6,18 @@ http://localhost:3000
 ```
 
 ## Index of Reference:
+* [Screenshots]()
 * [Users](https://github.com/tyogautomo/fancy-todo-1#users)
 * [Todos](https://github.com/tyogautomo/fancy-todo-1#todos)
 * [Projects](https://github.com/tyogautomo/fancy-todo-1#projects)
 
+## Screenshots
+1. Todo List
+![Todo List](https://i.ibb.co/LQq2PXs/Screen-Shot-2020-03-12-at-13-24-44.png)
+2. Create Todo
+![Create Todo](https://i.ibb.co/Jy9y7gh/Screen-Shot-2020-03-12-at-13-25-18.png)
+3. Project Detail
+![Project Detail](https://i.ibb.co/jHLLCP5/Screen-Shot-2020-03-12-at-13-25-45.png)
 
 ## Users API
 |  HTTP  | Endpoint | Headers | Body | Description | Reference |
